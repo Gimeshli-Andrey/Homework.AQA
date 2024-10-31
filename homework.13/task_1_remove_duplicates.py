@@ -43,8 +43,8 @@ def remove_duplicates(input_file1, input_file2, output_file):
 
 
 if __name__ == '__main__':
-    input_file1 = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13.1/work_with_csv/r-m-c.csv'
-    input_file2 = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13.1/work_with_csv/rmc.csv'
-    output_file = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13.1/result_gimeshli.csv'
+    input_file1 = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13/work_with_csv/r-m-c.csv'
+    input_file2 = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13/work_with_csv/rmc.csv'
+    output_file = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13/result_gimeshli.csv'
 
     remove_duplicates(input_file1, input_file2, output_file)
