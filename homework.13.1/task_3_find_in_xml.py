@@ -40,7 +40,7 @@ def find_incoming_by_group_number(xml_file, group_number):
 
 if __name__ == '__main__':
     group_number_to_search = 2
-    xml_file = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13/work_with_xml/groups.xml'
+    xml_file = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13.1/work_with_xml/groups.xml'
 
     incoming_value = find_incoming_by_group_number(xml_file, group_number_to_search)
 
