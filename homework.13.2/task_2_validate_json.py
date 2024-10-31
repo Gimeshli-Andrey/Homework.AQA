@@ -34,5 +34,5 @@ def validate_json_files(directory):
     logger.info("Завершення виконання скрипта")
 
 if __name__ == '__main__':
-    json_directory = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13/work_with_json'
+    json_directory = '/Users/gimeshli.a/Desktop/Homework.QAQ/homework.13.2/work_with_json'
     validate_json_files(json_directory)
