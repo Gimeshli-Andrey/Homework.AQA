@@ -1,0 +1,43 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Flask specific
+instance/
+.webassets-cache/
+
+# Configuration files
+*.env
+*.flaskenv
+
+# Logs
+*.log
+
+# SQLite database
+*.sqlite3
+
+# Pytest cache
+.cache/
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+*.tar.gz
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# MacOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
