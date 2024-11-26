@@ -1,0 +1,17 @@
+2024-11-04 20:33:49,045 - INFO - task_3_find_in_xml.py - Початок виконання скрипта
+2024-11-04 20:33:49,046 - INFO - task_3_find_in_xml.py - Incoming value for group 2: 0xACDC
+2024-11-04 20:33:49,046 - INFO - task_3_find_in_xml.py - Завершення виконання скрипта
+
+2024-11-04 20:33:58,405 - INFO - task_2_validate_json.py - Початок виконання скрипта
+2024-11-04 20:33:58,406 - INFO - task_2_validate_json.py - localizations_ru.json - валідний JSON.
+2024-11-04 20:33:58,406 - INFO - task_2_validate_json.py - localizations_en.json - валідний JSON.
+2024-11-04 20:33:58,407 - INFO - task_2_validate_json.py - swagger.json - валідний JSON.
+2024-11-04 20:33:58,408 - ERROR - task_2_validate_json.py - login.json - невалідний JSON.
+2024-11-04 20:33:58,408 - INFO - task_2_validate_json.py - Завершення виконання скрипта
+
+2024-11-04 20:34:06,887 - INFO - task_1_remove_duplicates.py - Початок виконання скрипта
+2024-11-04 20:34:06,891 - INFO - task_1_remove_duplicates.py - Успішно прочитано файл: /Users/gimeshli.a/Desktop/Homework.AQA/13.homework/work_with_csv/r-m-c.csv
+2024-11-04 20:34:06,893 - INFO - task_1_remove_duplicates.py - Успішно прочитано файл: /Users/gimeshli.a/Desktop/Homework.AQA/13.homework/work_with_csv/rmc.csv
+2024-11-04 20:34:06,899 - INFO - task_1_remove_duplicates.py - Дублікати успішно видалені.
+2024-11-04 20:34:06,903 - INFO - task_1_remove_duplicates.py - Результат успішно записано у файл: /Users/gimeshli.a/Desktop/Homework.AQA/13.homework/result_gimeshli.csv
+2024-11-04 20:34:06,903 - INFO - task_1_remove_duplicates.py - Завершення виконання скрипта
