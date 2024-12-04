@@ -1,0 +1,5 @@
+ERROR: Heartbeat at 04:50:42 is 35.0 seconds (>=33 sec)
+ERROR: Heartbeat at 03:38:36 is 35.0 seconds (>=33 sec)
+ERROR: Heartbeat at 02:26:30 is 36.0 seconds (>=33 sec)
+WARNING: Heartbeat at 01:34:38 is 32.0 seconds (31-33 sec range)
+ERROR: Heartbeat at 01:14:23 is 35.0 seconds (>=33 sec)

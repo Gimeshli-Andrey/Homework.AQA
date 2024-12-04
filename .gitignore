@@ -17,9 +17,6 @@ instance/
 *.env
 *.flaskenv
 
-# Logs
-*.log
-
 # SQLite database
 *.sqlite3
 
