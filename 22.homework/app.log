@@ -1,0 +1,258 @@
+2024-12-11 23:08:59,184 - INFO - BEGIN (implicit)
+2024-12-11 23:08:59,184 - INFO - PRAGMA main.table_info("students")
+2024-12-11 23:08:59,185 - INFO - [raw sql] ()
+2024-12-11 23:08:59,185 - INFO - PRAGMA main.table_info("courses")
+2024-12-11 23:08:59,185 - INFO - [raw sql] ()
+2024-12-11 23:08:59,185 - INFO - PRAGMA main.table_info("student_courses")
+2024-12-11 23:08:59,186 - INFO - [raw sql] ()
+2024-12-11 23:08:59,186 - INFO - COMMIT
+2024-12-11 23:08:59,191 - INFO - BEGIN (implicit)
+2024-12-11 23:08:59,193 - INFO - INSERT INTO courses (name) VALUES (?) RETURNING id
+2024-12-11 23:08:59,193 - INFO - [generated in 0.00010s (insertmanyvalues) 1/5 (ordered; batch not supported)] ('Курс_1',)
+2024-12-11 23:08:59,193 - INFO - INSERT INTO courses (name) VALUES (?) RETURNING id
+2024-12-11 23:08:59,193 - INFO - [insertmanyvalues 2/5 (ordered; batch not supported)] ('Курс_2',)
+2024-12-11 23:08:59,193 - INFO - INSERT INTO courses (name) VALUES (?) RETURNING id
+2024-12-11 23:08:59,193 - INFO - [insertmanyvalues 3/5 (ordered; batch not supported)] ('Курс_3',)
+2024-12-11 23:08:59,194 - INFO - INSERT INTO courses (name) VALUES (?) RETURNING id
+2024-12-11 23:08:59,194 - INFO - [insertmanyvalues 4/5 (ordered; batch not supported)] ('Курс_4',)
+2024-12-11 23:08:59,194 - INFO - INSERT INTO courses (name) VALUES (?) RETURNING id
+2024-12-11 23:08:59,194 - INFO - [insertmanyvalues 5/5 (ordered; batch not supported)] ('Курс_5',)
+2024-12-11 23:08:59,194 - INFO - COMMIT
+2024-12-11 23:08:59,195 - INFO - Курси створені та збережені у базі даних.
+2024-12-11 23:08:59,197 - INFO - BEGIN (implicit)
+2024-12-11 23:08:59,198 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,198 - INFO - [generated in 0.00013s (insertmanyvalues) 1/20 (ordered; batch not supported)] ('Олексій', 19)
+2024-12-11 23:08:59,200 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,200 - INFO - [insertmanyvalues 2/20 (ordered; batch not supported)] ('Катерина', 22)
+2024-12-11 23:08:59,200 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,200 - INFO - [insertmanyvalues 3/20 (ordered; batch not supported)] ('Ольга', 18)
+2024-12-11 23:08:59,200 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,200 - INFO - [insertmanyvalues 4/20 (ordered; batch not supported)] ('Марія', 20)
+2024-12-11 23:08:59,200 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,200 - INFO - [insertmanyvalues 5/20 (ordered; batch not supported)] ('Єва', 21)
+2024-12-11 23:08:59,200 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,201 - INFO - [insertmanyvalues 6/20 (ordered; batch not supported)] ('Джеймс', 21)
+2024-12-11 23:08:59,201 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,201 - INFO - [insertmanyvalues 7/20 (ordered; batch not supported)] ('Мія', 18)
+2024-12-11 23:08:59,201 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,201 - INFO - [insertmanyvalues 8/20 (ordered; batch not supported)] ('Давид', 21)
+2024-12-11 23:08:59,201 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,201 - INFO - [insertmanyvalues 9/20 (ordered; batch not supported)] ('Хлоя', 20)
+2024-12-11 23:08:59,201 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,201 - INFO - [insertmanyvalues 10/20 (ordered; batch not supported)] ('Ліам', 22)
+2024-12-11 23:08:59,201 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,201 - INFO - [insertmanyvalues 11/20 (ordered; batch not supported)] ('Софія', 18)
+2024-12-11 23:08:59,202 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,202 - INFO - [insertmanyvalues 12/20 (ordered; batch not supported)] ('Джек', 19)
+2024-12-11 23:08:59,202 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,202 - INFO - [insertmanyvalues 13/20 (ordered; batch not supported)] ('Ізабелла', 22)
+2024-12-11 23:08:59,202 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,202 - INFO - [insertmanyvalues 14/20 (ordered; batch not supported)] ('Айден', 20)
+2024-12-11 23:08:59,202 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,202 - INFO - [insertmanyvalues 15/20 (ordered; batch not supported)] ('Емілія', 25)
+2024-12-11 23:08:59,202 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,202 - INFO - [insertmanyvalues 16/20 (ordered; batch not supported)] ('Лукас', 18)
+2024-12-11 23:08:59,202 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,202 - INFO - [insertmanyvalues 17/20 (ordered; batch not supported)] ('Мейсон', 19)
+2024-12-11 23:08:59,203 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,203 - INFO - [insertmanyvalues 18/20 (ordered; batch not supported)] ('Амелія', 24)
+2024-12-11 23:08:59,203 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,203 - INFO - [insertmanyvalues 19/20 (ordered; batch not supported)] ('Ітан', 20)
+2024-12-11 23:08:59,203 - INFO - INSERT INTO students (name, age) VALUES (?, ?) RETURNING id
+2024-12-11 23:08:59,203 - INFO - [insertmanyvalues 20/20 (ordered; batch not supported)] ('Зоя', 24)
+2024-12-11 23:08:59,204 - INFO - COMMIT
+2024-12-11 23:08:59,205 - INFO - Студенти створені та збережені у базі даних.
+2024-12-11 23:08:59,206 - INFO - BEGIN (implicit)
+2024-12-11 23:08:59,208 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,208 - INFO - [generated in 0.00019s] (163,)
+2024-12-11 23:08:59,209 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses 
+WHERE courses.id = ?
+2024-12-11 23:08:59,209 - INFO - [generated in 0.00015s] (43,)
+2024-12-11 23:08:59,210 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,211 - INFO - [generated in 0.00015s] (163, 43)
+2024-12-11 23:08:59,211 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses 
+WHERE courses.id = ?
+2024-12-11 23:08:59,211 - INFO - [cached since 0.002354s ago] (44,)
+2024-12-11 23:08:59,212 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,212 - INFO - [cached since 0.001611s ago] (163, 44)
+2024-12-11 23:08:59,212 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,212 - INFO - [cached since 0.004882s ago] (164,)
+2024-12-11 23:08:59,213 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses 
+WHERE courses.id = ?
+2024-12-11 23:08:59,213 - INFO - [cached since 0.003965s ago] (46,)
+2024-12-11 23:08:59,213 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,214 - INFO - [cached since 0.003197s ago] (164, 46)
+2024-12-11 23:08:59,214 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses 
+WHERE courses.id = ?
+2024-12-11 23:08:59,214 - INFO - [cached since 0.004978s ago] (45,)
+2024-12-11 23:08:59,214 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,215 - INFO - [cached since 0.004205s ago] (164, 45)
+2024-12-11 23:08:59,215 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,215 - INFO - [cached since 0.007462s ago] (165,)
+2024-12-11 23:08:59,215 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,216 - INFO - [cached since 0.00523s ago] (165, 46)
+2024-12-11 23:08:59,216 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses 
+WHERE courses.id = ?
+2024-12-11 23:08:59,216 - INFO - [cached since 0.007081s ago] (47,)
+2024-12-11 23:08:59,217 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,217 - INFO - [cached since 0.006359s ago] (165, 47)
+2024-12-11 23:08:59,217 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,217 - INFO - [cached since 0.009632s ago] (166,)
+2024-12-11 23:08:59,218 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,218 - INFO - [cached since 0.007382s ago] (166, 46)
+2024-12-11 23:08:59,218 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,218 - INFO - [cached since 0.01063s ago] (167,)
+2024-12-11 23:08:59,219 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,219 - INFO - [cached since 0.008465s ago] (167, 43)
+2024-12-11 23:08:59,219 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,219 - INFO - [cached since 0.01173s ago] (168,)
+2024-12-11 23:08:59,220 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,220 - INFO - [generated in 0.00016s] [(168, 47), (168, 44), (168, 43)]
+2024-12-11 23:08:59,221 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,221 - INFO - [cached since 0.01308s ago] (169,)
+2024-12-11 23:08:59,221 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,221 - INFO - [cached since 0.001309s ago] [(169, 43), (169, 44)]
+2024-12-11 23:08:59,222 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,222 - INFO - [cached since 0.01417s ago] (170,)
+2024-12-11 23:08:59,222 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,222 - INFO - [cached since 0.002434s ago] [(170, 43), (170, 44), (170, 45)]
+2024-12-11 23:08:59,223 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,223 - INFO - [cached since 0.01532s ago] (171,)
+2024-12-11 23:08:59,223 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,224 - INFO - [cached since 0.003578s ago] [(171, 47), (171, 46), (171, 45)]
+2024-12-11 23:08:59,224 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,224 - INFO - [cached since 0.01646s ago] (172,)
+2024-12-11 23:08:59,225 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,225 - INFO - [cached since 0.004684s ago] [(172, 45), (172, 47), (172, 46)]
+2024-12-11 23:08:59,225 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,225 - INFO - [cached since 0.01754s ago] (173,)
+2024-12-11 23:08:59,226 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,226 - INFO - [cached since 0.005772s ago] [(173, 44), (173, 43), (173, 45)]
+2024-12-11 23:08:59,226 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,226 - INFO - [cached since 0.01865s ago] (174,)
+2024-12-11 23:08:59,227 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,227 - INFO - [cached since 0.006873s ago] [(174, 47), (174, 45)]
+2024-12-11 23:08:59,227 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,227 - INFO - [cached since 0.01971s ago] (175,)
+2024-12-11 23:08:59,228 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,228 - INFO - [cached since 0.007923s ago] [(175, 45), (175, 44)]
+2024-12-11 23:08:59,228 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,228 - INFO - [cached since 0.02075s ago] (176,)
+2024-12-11 23:08:59,229 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,229 - INFO - [cached since 0.00896s ago] [(176, 45), (176, 44), (176, 43)]
+2024-12-11 23:08:59,229 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,229 - INFO - [cached since 0.02178s ago] (177,)
+2024-12-11 23:08:59,230 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,230 - INFO - [cached since 0.01952s ago] (177, 43)
+2024-12-11 23:08:59,230 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,230 - INFO - [cached since 0.02279s ago] (178,)
+2024-12-11 23:08:59,231 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,231 - INFO - [cached since 0.0205s ago] (178, 46)
+2024-12-11 23:08:59,231 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,231 - INFO - [cached since 0.02372s ago] (179,)
+2024-12-11 23:08:59,232 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,232 - INFO - [cached since 0.02141s ago] (179, 47)
+2024-12-11 23:08:59,232 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,232 - INFO - [cached since 0.02466s ago] (180,)
+2024-12-11 23:08:59,233 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,233 - INFO - [cached since 0.01293s ago] [(180, 47), (180, 46), (180, 45)]
+2024-12-11 23:08:59,233 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,233 - INFO - [cached since 0.02577s ago] (181,)
+2024-12-11 23:08:59,234 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,234 - INFO - [cached since 0.02348s ago] (181, 46)
+2024-12-11 23:08:59,234 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.id = ?
+2024-12-11 23:08:59,234 - INFO - [cached since 0.0267s ago] (182,)
+2024-12-11 23:08:59,235 - INFO - INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)
+2024-12-11 23:08:59,235 - INFO - [cached since 0.02432s ago] (182, 44)
+2024-12-11 23:08:59,235 - INFO - COMMIT
+2024-12-11 23:08:59,236 - INFO - Студенти зареєстровані на курси.
+2024-12-11 23:09:07,086 - INFO - BEGIN (implicit)
+2024-12-11 23:09:07,088 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses 
+WHERE courses.name = ?
+ LIMIT ? OFFSET ?
+2024-12-11 23:09:07,088 - INFO - [generated in 0.00021s] ('Course_1', 1, 0)
+2024-12-11 23:09:07,093 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students, student_courses 
+WHERE ? = student_courses.course_id AND students.id = student_courses.student_id
+2024-12-11 23:09:07,093 - INFO - [generated in 0.00022s] (23,)
+2024-12-11 23:09:07,093 - INFO - Студенти на курсі Course_1: Alex, Olga, Mary, Eva, Mia, David, Aiden, Mason, Ethan, Zoe
+2024-12-11 23:09:07,094 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.name = ?
+ LIMIT ? OFFSET ?
+2024-12-11 23:09:07,094 - INFO - [generated in 0.00016s] ('Alex', 1, 0)
+2024-12-11 23:09:07,095 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses, student_courses 
+WHERE ? = student_courses.student_id AND courses.id = student_courses.course_id
+2024-12-11 23:09:07,096 - INFO - [generated in 0.00015s] (21,)
+2024-12-11 23:09:07,096 - INFO - Курси, на яких зареєстрований студент Alex: Math, Physics
+2024-12-11 23:09:11,315 - INFO - BEGIN (implicit)
+2024-12-11 23:09:11,317 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.name = ?
+ LIMIT ? OFFSET ?
+2024-12-11 23:09:11,317 - INFO - [generated in 0.00024s] ('Alex', 1, 0)
+2024-12-11 23:09:11,319 - INFO - COMMIT
+2024-12-11 23:09:11,319 - INFO - Вік студента Alex оновлено на 24
+2024-12-11 23:09:11,319 - INFO - BEGIN (implicit)
+2024-12-11 23:09:11,319 - INFO - SELECT students.id AS students_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.name = ?
+ LIMIT ? OFFSET ?
+2024-12-11 23:09:11,320 - INFO - [cached since 0.002301s ago] ('Kate', 1, 0)
+2024-12-11 23:09:11,323 - INFO - SELECT courses.id AS courses_id, courses.name AS courses_name 
+FROM courses, student_courses 
+WHERE ? = student_courses.student_id AND courses.id = student_courses.course_id
+2024-12-11 23:09:11,324 - INFO - [generated in 0.00019s] (104,)
+2024-12-11 23:09:11,325 - INFO - DELETE FROM student_courses WHERE student_courses.student_id = ? AND student_courses.course_id = ?
+2024-12-11 23:09:11,325 - INFO - [generated in 0.00015s] (104, 28)
+2024-12-11 23:09:11,326 - INFO - DELETE FROM students WHERE students.id = ?
+2024-12-11 23:09:11,326 - INFO - [generated in 0.00014s] (104,)
+2024-12-11 23:09:11,326 - INFO - COMMIT
+2024-12-11 23:09:11,334 - INFO - Студент Kate видалений з бази даних
