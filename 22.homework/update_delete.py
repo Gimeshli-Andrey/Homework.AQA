@@ -1,39 +1,78 @@
+from models import Student, Course, get_db_connection
 import logging
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from models import Student, Course
 
-logging.basicConfig(
-    filename='app.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-def update_student_age(session, student_name, new_age):
-    student = session.query(Student).filter(Student.name == student_name).first()
-    if student:
-        student.age = new_age
-        session.commit()
-        logging.info(f"Вік студента {student_name} оновлено на {new_age}")
-    else:
-        logging.error(f"Студент {student_name} не знайдений в базі даних")
 
-def delete_student(session, student_name):
-    student = session.query(Student).filter(Student.name == student_name).first()
-    if student:
-        session.delete(student)
-        session.commit()
-        logging.info(f"Студент {student_name} видалений з бази даних")
-    else:
-        logging.error(f"Студент {student_name} не знайдений в базі даних")
+def update_student(db_url, student_id, **kwargs):
+    session, _ = get_db_connection(db_url)
 
-def create_engine_and_session():
-    engine = create_engine('sqlite:///university.db', echo=True)
-    Session = sessionmaker(bind=engine)
-    return Session()
+    try:
+        student = session.get(Student, student_id)
 
-if __name__ == '__main__':
-    session = create_engine_and_session()
+        if student:
+            for key, value in kwargs.items():
+                setattr(student, key, value)
 
-    update_student_age(session, "Alex", 24)
-    delete_student(session, "Kate")
+            session.commit()
+            logger.info(f"Дані студента {student_id} оновлено.")
+        else:
+            logger.warning(f"Студента з ID {student_id} не знайдено.")
+
+    except Exception as e:
+        session.rollback()
+        logger.error(f"Помилка оновлення: {e}")
+    finally:
+        session.close()
+
+
+def delete_student(db_url, student_id):
+    session, _ = get_db_connection(db_url)
+
+    try:
+        student = session.get(Student, student_id)
+
+        if student:
+            session.delete(student)
+            session.commit()
+            logger.info(f"Студента {student_id} видалено.")
+        else:
+            logger.warning(f"Студента з ID {student_id} не знайдено.")
+
+    except Exception as e:
+        session.rollback()
+        logger.error(f"Помилка видалення: {e}")
+    finally:
+        session.close()
+
+
+def add_student_to_course(db_url, student_id, course_id):
+    session, _ = get_db_connection(db_url)
+
+    try:
+        student = session.get(Student, student_id)
+        course = session.get(Course, course_id)
+
+        if student and course:
+            if course not in student.courses:
+                student.courses.append(course)
+                session.commit()
+                logger.info(f"Студент {student_id} доданий на курс {course_id}")
+            else:
+                logger.info(f"Студент вже записаний на цей курс")
+        else:
+            logger.warning("Студент або курс не знайдені")
+
+    except Exception as e:
+        session.rollback()
+        logger.error(f"Помилка додавання на курс: {e}")
+    finally:
+        session.close()
+
+if __name__ == "__main__":
+    db_url = "postgresql://gimeshli.a:@localhost:5432/bd_name"
+
+    update_student(db_url, 1, age=25, email="new_email@example.com")
+    add_student_to_course(db_url, 2, 3)
+    delete_student(db_url, 4)

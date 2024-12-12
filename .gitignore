@@ -38,3 +38,6 @@ build/
 
 # Windows specific
 Thumbs.db
+
+# JetBrains IDE specific
+.idea/

@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ddc8943-172f-4b5b-b05f-983d7073694e" name="Changes" comment="" />
+    <list default="true" id="5ddc8943-172f-4b5b-b05f-983d7073694e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/22.homework/app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/22.homework/create_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/22.homework/create_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/22.homework/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/22.homework/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/22.homework/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/22.homework/queries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/22.homework/university.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/22.homework/update_delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/22.homework/update_delete.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,45 +43,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.analyze_log.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.client.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_data.executor&quot;: &quot;Run&quot;,
-    &quot;Python.mars_photos.executor&quot;: &quot;Run&quot;,
-    &quot;Python.models.executor&quot;: &quot;Run&quot;,
-    &quot;Python.queries.executor&quot;: &quot;Run&quot;,
-    &quot;Python.update_delete.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gimeshli.a/Desktop/Homework.AQA&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.analyze_log.executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.client.executor": "Run",
+    "Python.create_data.executor": "Run",
+    "Python.mars_photos.executor": "Run",
+    "Python.models.executor": "Run",
+    "Python.queries.executor": "Run",
+    "Python.university_db.executor": "Run",
+    "Python.update_delete.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/gimeshli.a/Desktop/Homework.AQA"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.update_delete">
-    <configuration name="analyze_log" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Homework.AQA" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/21.homework" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/21.homework/analyze_log.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="create_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Homework.AQA" />
       <option name="ENV_FILES" value="" />
@@ -139,6 +127,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="university_db" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Homework.AQA" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/22.homework" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/22.homework/university_db.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="update_delete" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Homework.AQA" />
       <option name="ENV_FILES" value="" />
@@ -167,7 +177,7 @@
         <item itemvalue="Python.queries" />
         <item itemvalue="Python.create_data" />
         <item itemvalue="Python.models" />
-        <item itemvalue="Python.analyze_log" />
+        <item itemvalue="Python.university_db" />
       </list>
     </recent_temporary>
   </component>
@@ -188,5 +198,16 @@
       <updated>1732634576163</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
