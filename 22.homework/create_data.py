@@ -1,54 +1,72 @@
-import logging
 import random
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from models import Base, Student, Course, StudentCourse
+from sqlalchemy import text
+from models import Base, Student, Course, get_db_connection, logger
 
-logging.basicConfig(
-    filename='app.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
-def create_courses_and_students(session):
+def create_tables(engine):
     try:
-        courses = [Course(name=f"Курс_{i}") for i in range(1, 6)]
+        Base.metadata.drop_all(engine)
+
+        Base.metadata.create_all(engine)
+        logger.info("Таблиці успішно створені")
+    except Exception as e:
+        logger.error(f"Помилка створення таблиць: {e}")
+
+
+def create_test_data(db_url):
+    session, engine = get_db_connection(db_url)
+
+    create_tables(engine)
+
+    courses_data = [
+        {"title": "Програмування", "description": "Основи розробки ПЗ"},
+        {"title": "Бази Даних", "description": "Вивчення SQL та ORM"},
+        {"title": "Комп'ютерні мережі", "description": "Архітектура мереж"},
+        {"title": "Штучний Інтелект", "description": "Машинне навчання"},
+        {"title": "Кібербезпека", "description": "Захист інформаційних систем"}
+    ]
+
+    try:
+        courses = [Course(**data) for data in courses_data]
         session.add_all(courses)
         session.commit()
-        logging.info("Курси створені та збережені у базі даних.")
 
-        students_names = [
-            "Олексій", "Катерина", "Ольга", "Марія", "Єва", "Джеймс", "Мія", "Давид", "Хлоя", "Ліам",
-            "Софія", "Джек", "Ізабелла", "Айден", "Емілія", "Лукас", "Мейсон", "Амелія", "Ітан", "Зоя"
+        names = [
+            "Іван Петров", "Марія Коваленко", "Андрій Сидоренко",
+            "Олена Мельник", "Тетяна Шевченко", "Максим Кузнецов",
+            "Наталія Гончарова", "Роман Ткаченко", "Світлана Мартинова",
+            "Дмитро Зінченко", "Юлія Поліщук", "Олег Бондаренко",
+            "Віктор Кравченко", "Ірина Литвин", "Богдан Мороз",
+            "Катерина Данилюк", "Артем Панасюк", "Валентина Степанова",
+            "Микола Токар", "Ганна Гриценко"
         ]
-        students = [Student(name=name, age=random.randint(18, 25)) for name in students_names]
+
+        students = []
+        for i, name in enumerate(names, 1):
+            student = Student(
+                name=name,
+                age=random.randint(18, 30),
+                email=f"student{i}@example.com"
+            )
+
+            student_courses = random.sample(courses, random.randint(1, 3))
+            student.courses.extend(student_courses)
+
+            students.append(student)
+
         session.add_all(students)
         session.commit()
-        logging.info("Студенти створені та збережені у базі даних.")
 
-        for student in students:
-            random_courses = random.sample(courses, random.randint(1, 3))
-            for course in random_courses:
-                student_course = StudentCourse(student_id=student.id, course_id=course.id)
-                session.add(student_course)
-        session.commit()
-        logging.info("Студенти зареєстровані на курси.")
+        logger.info("Тестові дані успішно створено!")
 
     except Exception as e:
         session.rollback()
-        logging.error(f"Помилка під час створення даних: {e}")
-        raise
+        logger.error(f"Помилка при створенні даних: {e}")
 
-def create_engine_and_session():
-    try:
-        engine = create_engine('sqlite:///university.db', echo=True)
-        Base.metadata.create_all(engine)
-        Session = sessionmaker(bind=engine)
-        return Session()
-    except Exception as e:
-        logging.error(f"Помилка під час налаштування бази даних: {e}")
-        raise
+    finally:
+        session.close()
 
-if __name__ == '__main__':
-    session = create_engine_and_session()
-    create_courses_and_students(session)
+
+if __name__ == "__main__":
+    db_url = "postgresql://gimeshli.a:@localhost:5432/bd_name"
+    create_test_data(db_url)

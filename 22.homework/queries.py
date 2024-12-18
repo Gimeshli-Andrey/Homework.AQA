@@ -1,41 +1,53 @@
-import logging
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from models import Student, Course
+from sqlalchemy import select
+from models import Student, Course, get_db_connection, logger
 
-logging.basicConfig(
-    filename='app.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
-def query_students_for_course(session, course_name):
-    course = session.query(Course).filter(Course.name == course_name).first()
-    if course:
-        students = course.students
-        logging.info(f"Студенти на курсі {course_name}: {', '.join([student.name for student in students])}")
-        return students
-    else:
-        logging.error(f"Курс {course_name} не знайдено в базі даних")
+def get_students_by_course(db_url, course_title):
+    session, _ = get_db_connection(db_url)
+
+    try:
+        course = session.query(Course).filter(Course.title == course_title).first()
+
+        if course:
+            logger.info(f"Студенти курсу '{course_title}':")
+            for student in course.students:
+                logger.info(f"- {student.name}")
+            return course.students
+        else:
+            logger.warning(f"Курс '{course_title}' не знайдено.")
+            return []
+
+    except Exception as e:
+        logger.error(f"Помилка при отриманні даних: {e}")
         return []
+    finally:
+        session.close()
 
-def query_courses_for_student(session, student_name):
-    student = session.query(Student).filter(Student.name == student_name).first()
-    if student:
-        courses = student.courses
-        logging.info(f"Курси, на яких зареєстрований студент {student_name}: {', '.join([course.name for course in courses])}")
-        return courses
-    else:
-        logging.error(f"Студент {student_name} не знайдений в базі даних")
+
+def get_courses_by_student(db_url, student_name):
+    session, _ = get_db_connection(db_url)
+
+    try:
+        student = session.query(Student).filter(Student.name == student_name).first()
+
+        if student:
+            logger.info(f"Курси студента {student_name}:")
+            for course in student.courses:
+                logger.info(f"- {course.title}")
+            return student.courses
+        else:
+            logger.warning(f"Студента '{student_name}' не знайдено.")
+            return []
+
+    except Exception as e:
+        logger.error(f"Помилка при отриманні даних: {e}")
         return []
+    finally:
+        session.close()
 
-def create_engine_and_session():
-    engine = create_engine('sqlite:///university.db', echo=True)
-    Session = sessionmaker(bind=engine)
-    return Session()
 
-if __name__ == '__main__':
-    session = create_engine_and_session()
+if __name__ == "__main__":
+    db_url = "postgresql://gimeshli.a:@localhost:5432/bd_name"
 
-    query_students_for_course(session, "Course_1")
-    query_courses_for_student(session, "Alex")
+    get_students_by_course(db_url, "Бази Даних")
+    get_courses_by_student(db_url, "Іван Петров")
