@@ -1,0 +1,102 @@
+2024-12-26 21:20:34,493 - INFO - Перевірка XPath локаторів:
+2024-12-26 21:20:44,619 - WARNING - Locator not found: //input[@id='signinEmail'] of type xpath
+2024-12-26 21:20:44,619 - INFO - XPath локатор 1: Не знайдено
+2024-12-26 21:20:54,965 - WARNING - Locator not found: //input[@id='signinPassword'] of type xpath
+2024-12-26 21:20:54,965 - INFO - XPath локатор 2: Не знайдено
+2024-12-26 21:20:54,970 - INFO - XPath локатор 3: Знайдено
+2024-12-26 21:21:05,261 - WARNING - Locator not found: //button[contains(text(), 'Registration')] of type xpath
+2024-12-26 21:21:05,261 - INFO - XPath локатор 4: Не знайдено
+2024-12-26 21:21:05,266 - INFO - XPath локатор 6: Знайдено
+2024-12-26 21:21:15,465 - WARNING - Locator not found: //div[contains(@class, 'header')]//button[contains(@class, 'profile-button')] of type xpath
+2024-12-26 21:21:15,465 - INFO - XPath локатор 7: Не знайдено
+2024-12-26 21:21:25,657 - WARNING - Locator not found: //a[contains(@class, 'nav-link') and contains(text(), 'Garage')] of type xpath
+2024-12-26 21:21:25,657 - INFO - XPath локатор 8: Не знайдено
+2024-12-26 21:21:36,082 - WARNING - Locator not found: //div[@class='header']//img[@alt='avatar'] of type xpath
+2024-12-26 21:21:36,082 - INFO - XPath локатор 9: Не знайдено
+2024-12-26 21:21:46,241 - WARNING - Locator not found: //button[text()='Log out'] of type xpath
+2024-12-26 21:21:46,242 - INFO - XPath локатор 10: Не знайдено
+2024-12-26 21:21:56,409 - WARNING - Locator not found: //button[contains(@class, 'btn-primary') and text()='Add car'] of type xpath
+2024-12-26 21:21:56,409 - INFO - XPath локатор 11: Не знайдено
+2024-12-26 21:22:06,600 - WARNING - Locator not found: //select[contains(@id, 'brands')]//option[text()='BMW'] of type xpath
+2024-12-26 21:22:06,600 - INFO - XPath локатор 12: Не знайдено
+2024-12-26 21:22:16,752 - WARNING - Locator not found: //input[@placeholder='Enter mileage'] of type xpath
+2024-12-26 21:22:16,753 - INFO - XPath локатор 13: Не знайдено
+2024-12-26 21:22:26,922 - WARNING - Locator not found: (//div[contains(@class, 'car-item')])[last()] of type xpath
+2024-12-26 21:22:26,922 - INFO - XPath локатор 14: Не знайдено
+2024-12-26 21:22:37,111 - WARNING - Locator not found: //div[@class='car-list']//div[contains(@class, 'car-item')] of type xpath
+2024-12-26 21:22:37,111 - INFO - XPath локатор 15: Не знайдено
+2024-12-26 21:22:47,276 - WARNING - Locator not found: //div[contains(@class, 'profile-form')]//input[@id='name'] of type xpath
+2024-12-26 21:22:47,276 - INFO - XPath локатор 16: Не знайдено
+2024-12-26 21:22:57,444 - WARNING - Locator not found: //button[contains(@class, 'edit-profile') and text()='Edit profile'] of type xpath
+2024-12-26 21:22:57,444 - INFO - XPath локатор 17: Не знайдено
+2024-12-26 21:23:07,618 - WARNING - Locator not found: //div[contains(@class, 'profile-details')]//span[text()='Email']/following-sibling::span of type xpath
+2024-12-26 21:23:07,619 - INFO - XPath локатор 18: Не знайдено
+2024-12-26 21:23:17,791 - WARNING - Locator not found: //form[@id='profile-form']//button[@type='submit'] of type xpath
+2024-12-26 21:23:17,791 - INFO - XPath локатор 19: Не знайдено
+2024-12-26 21:23:27,951 - WARNING - Locator not found: //div[contains(@class, 'profile-stats')]//div[contains(@class, 'stats-item')] of type xpath
+2024-12-26 21:23:27,952 - INFO - XPath локатор 20: Не знайдено
+2024-12-26 21:23:38,132 - WARNING - Locator not found: //table[@id='expenses-table']//tbody//tr[1]//td[1] of type xpath
+2024-12-26 21:23:38,132 - INFO - XPath локатор 21: Не знайдено
+2024-12-26 21:23:48,300 - WARNING - Locator not found: //div[contains(@class, 'alert')]//button[@class='close'] of type xpath
+2024-12-26 21:23:48,300 - INFO - XPath локатор 22: Не знайдено
+2024-12-26 21:23:58,465 - WARNING - Locator not found: //div[contains(@class, 'settings')]//label[contains(text(), 'Currency')] of type xpath
+2024-12-26 21:23:58,465 - INFO - XPath локатор 23: Не знайдено
+2024-12-26 21:24:08,683 - WARNING - Locator not found: //button[contains(@class, 'btn-danger') and text()='Remove'] of type xpath
+2024-12-26 21:24:08,683 - INFO - XPath локатор 24: Не знайдено
+2024-12-26 21:24:18,852 - WARNING - Locator not found: //div[contains(@class, 'pagination')]//button[contains(@class, 'active')] of type xpath
+2024-12-26 21:24:18,852 - INFO - XPath локатор 25: Не знайдено
+2024-12-26 21:24:18,852 - INFO - 
+Перевірка CSS локаторів:
+2024-12-26 21:24:29,019 - WARNING - Locator not found: #signinEmail of type css selector
+2024-12-26 21:24:29,019 - INFO - CSS локатор 1: Не знайдено
+2024-12-26 21:24:39,191 - WARNING - Locator not found: #signinPassword of type css selector
+2024-12-26 21:24:39,191 - INFO - CSS локатор 2: Не знайдено
+2024-12-26 21:24:39,195 - INFO - CSS локатор 3: Знайдено
+2024-12-26 21:24:49,363 - WARNING - Locator not found: .form-signin input[type='email'] of type css selector
+2024-12-26 21:24:49,363 - INFO - CSS локатор 4: Не знайдено
+2024-12-26 21:24:59,540 - WARNING - Locator not found: .nav-link.active of type css selector
+2024-12-26 21:24:59,541 - INFO - CSS локатор 5: Не знайдено
+2024-12-26 21:25:09,717 - WARNING - Locator not found: .header .profile-button of type css selector
+2024-12-26 21:25:09,717 - INFO - CSS локатор 6: Не знайдено
+2024-12-26 21:25:19,887 - WARNING - Locator not found: nav .navbar-brand of type css selector
+2024-12-26 21:25:19,888 - INFO - CSS локатор 7: Не знайдено
+2024-12-26 21:25:30,065 - WARNING - Locator not found: .garage-empty-title of type css selector
+2024-12-26 21:25:30,065 - INFO - CSS локатор 8: Не знайдено
+2024-12-26 21:25:40,237 - WARNING - Locator not found: .car-item img.car-image of type css selector
+2024-12-26 21:25:40,237 - INFO - CSS локатор 9: Не знайдено
+2024-12-26 21:25:50,409 - WARNING - Locator not found: .profile-nav .nav-item of type css selector
+2024-12-26 21:25:50,409 - INFO - CSS локатор 10: Не знайдено
+2024-12-26 21:26:00,577 - WARNING - Locator not found: form.add-car-form select#brand of type css selector
+2024-12-26 21:26:00,577 - INFO - CSS локатор 11: Не знайдено
+2024-12-26 21:26:10,737 - WARNING - Locator not found: .car-list .car-item:first-child of type css selector
+2024-12-26 21:26:10,737 - INFO - CSS локатор 12: Не знайдено
+2024-12-26 21:26:20,913 - WARNING - Locator not found: input[type='number'][name='mileage'] of type css selector
+2024-12-26 21:26:20,913 - INFO - CSS локатор 13: Не знайдено
+2024-12-26 21:26:31,078 - WARNING - Locator not found: .expenses-table tbody tr:last-child of type css selector
+2024-12-26 21:26:31,079 - INFO - CSS локатор 14: Не знайдено
+2024-12-26 21:26:41,247 - WARNING - Locator not found: .settings-form input[type='checkbox'] of type css selector
+2024-12-26 21:26:41,247 - INFO - CSS локатор 15: Не знайдено
+2024-12-26 21:26:51,426 - WARNING - Locator not found: .profile-form #name of type css selector
+2024-12-26 21:26:51,426 - INFO - CSS локатор 16: Не знайдено
+2024-12-26 21:27:01,589 - WARNING - Locator not found: .alert.alert-success of type css selector
+2024-12-26 21:27:01,589 - INFO - CSS локатор 17: Не знайдено
+2024-12-26 21:27:11,767 - WARNING - Locator not found: .modal-dialog .modal-content of type css selector
+2024-12-26 21:27:11,767 - INFO - CSS локатор 18: Не знайдено
+2024-12-26 21:27:21,945 - WARNING - Locator not found: button.btn-outline-dark of type css selector
+2024-12-26 21:27:21,945 - INFO - CSS локатор 19: Не знайдено
+2024-12-26 21:27:32,161 - WARNING - Locator not found: .pagination .page-item.active of type css selector
+2024-12-26 21:27:32,161 - INFO - CSS локатор 20: Не знайдено
+2024-12-26 21:27:42,399 - WARNING - Locator not found: table.expenses-table > thead > tr of type css selector
+2024-12-26 21:27:42,399 - INFO - CSS локатор 21: Не знайдено
+2024-12-26 21:27:52,622 - WARNING - Locator not found: .dropdown-menu.show of type css selector
+2024-12-26 21:27:52,623 - INFO - CSS локатор 22: Не знайдено
+2024-12-26 21:28:02,845 - WARNING - Locator not found: form.edit-profile-form of type css selector
+2024-12-26 21:28:02,845 - INFO - CSS локатор 23: Не знайдено
+2024-12-26 21:28:13,040 - WARNING - Locator not found: .stats-block .stats-item of type css selector
+2024-12-26 21:28:13,040 - INFO - CSS локатор 24: Не знайдено
+2024-12-26 21:28:23,245 - WARNING - Locator not found: .footer .copyright of type css selector
+2024-12-26 21:28:23,245 - INFO - CSS локатор 25: Не знайдено
+2024-12-26 21:28:23,245 - INFO - 
+--- Результати перевірки ---
+2024-12-26 21:28:23,245 - INFO - XPath локаторів знайдено: 2, не знайдено: 22
+2024-12-26 21:28:23,245 - INFO - CSS локаторів знайдено: 1, не знайдено: 24
