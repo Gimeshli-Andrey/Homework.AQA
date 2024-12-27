@@ -1,20 +1,10 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-
-driver = webdriver.Safari()
-driver.get("https://UserName:Password@qauto2.forstudy.space")
-
-# XPath
+# XPath локатори
 xpath_locators = {
     # Форма входу та реєстрації
     1: "//input[@id='signinEmail']",  # Поле email при вході
-    2: "//input[contains(@id, 'password')]",  # Поле пароля
-    3: "//button[text()='Sign in']",  # Кнопка входу
+    2: "//input[@id='signinPassword']",  # Поле пароля
+    3: "//button[text()='Sign In']",  # Кнопка входу
     4: "//button[contains(text(), 'Registration')]",  # Кнопка реєстрації
-    5: "//div[contains(@class, 'form-signin')]//input[@type='email']",  # Поле email у формі
 
     # Навігація та хедер
     6: "//nav//a[text()='Home']",  # Посилання на головну сторінку
@@ -45,7 +35,7 @@ xpath_locators = {
     25: "//div[contains(@class, 'pagination')]//button[contains(@class, 'active')]"  # Активна сторінка пагінації
 }
 
-# CSS
+# CSS локатори
 css_locators = {
     1: "#signinEmail",  # Поле email
     2: "#signinPassword",  # Поле пароля
@@ -77,25 +67,3 @@ css_locators = {
     24: ".stats-block .stats-item",  # Елемент статистики
     25: ".footer .copyright"  # Копірайт у футері
 }
-
-def check_locator(locator, locator_type):
-    try:
-        WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((locator_type, locator))
-        )
-        return True
-    except TimeoutException:
-        return False
-
-try:
-    print("Перевірка XPath локаторів:")
-    for number, xpath in xpath_locators.items():
-        result = check_locator(xpath, By.XPATH)
-        print(f"XPath локатор {number}: {'Знайдено' if result else 'Не знайдено'}")
-
-    print("\nПеревірка CSS локаторів:")
-    for number, css in css_locators.items():
-        result = check_locator(css, By.CSS_SELECTOR)
-        print(f"CSS локатор {number}: {'Знайдено' if result else 'Не знайдено'}")
-finally:
-    driver.quit()
