@@ -1,0 +1,27 @@
+2024-12-29 10:41:54,420 - INFO - Chrome driver initialized
+2024-12-29 10:41:54,547 - INFO - Navigated to http://localhost:8000/dz.html
+2024-12-29 10:41:54,560 - INFO - Page loaded successfully
+2024-12-29 10:41:54,580 - INFO - Frame 1 is present on the page
+2024-12-29 10:41:54,592 - INFO - Frame 2 is present on the page
+2024-12-29 10:41:54,592 - INFO - Processing frame frame1
+2024-12-29 10:41:54,624 - INFO - Switched to frame: frame1
+2024-12-29 10:41:54,636 - INFO - Input field found in frame frame1
+2024-12-29 10:41:54,668 - INFO - Verify button found in frame frame1
+2024-12-29 10:41:54,859 - INFO - Entered secret text into frame: frame1
+2024-12-29 10:41:55,053 - INFO - Clicked 'Verify' button in frame: frame1
+2024-12-29 10:41:55,059 - INFO - Alert received in frame frame1: Верифікація пройшла успішно!
+2024-12-29 10:41:55,066 - INFO - Alert accepted in frame frame1
+2024-12-29 10:41:55,072 - INFO - Switched back to default content from frame: frame1
+2024-12-29 10:41:55,073 - INFO - Verification passed for frame1
+2024-12-29 10:41:55,073 - INFO - Processing frame frame2
+2024-12-29 10:41:55,108 - INFO - Switched to frame: frame2
+2024-12-29 10:41:55,124 - INFO - Input field found in frame frame2
+2024-12-29 10:41:55,160 - INFO - Verify button found in frame frame2
+2024-12-29 10:41:55,318 - INFO - Entered secret text into frame: frame2
+2024-12-29 10:41:55,470 - INFO - Clicked 'Verify' button in frame: frame2
+2024-12-29 10:41:55,474 - INFO - Alert received in frame frame2: Верифікація пройшла успішно!
+2024-12-29 10:41:55,478 - INFO - Alert accepted in frame frame2
+2024-12-29 10:41:55,483 - INFO - Switched back to default content from frame: frame2
+2024-12-29 10:41:55,483 - INFO - Verification passed for frame2
+2024-12-29 10:41:55,483 - INFO - Both frame verifications passed
+2024-12-29 10:41:55,594 - INFO - Chrome driver closed

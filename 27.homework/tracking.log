@@ -1,0 +1,78 @@
+2025-01-03 17:37:10,491 - INFO - Відкриття сторінки трекінгу...
+2025-01-03 17:37:11,502 - INFO - Введення номера накладної: 59000509805747
+2025-01-03 17:37:32,498 - ERROR - Помилка при отриманні статусу: Message: 
+Stacktrace:
+0   chromedriver                        0x0000000105e3d268 chromedriver + 7098984
+1   chromedriver                        0x0000000105e3513a chromedriver + 7065914
+2   chromedriver                        0x00000001057d9d70 chromedriver + 400752
+3   chromedriver                        0x0000000105828bd3 chromedriver + 723923
+4   chromedriver                        0x0000000105828ed1 chromedriver + 724689
+5   chromedriver                        0x000000010586ee74 chromedriver + 1011316
+6   chromedriver                        0x000000010584d23d chromedriver + 873021
+7   chromedriver                        0x000000010586c15e chromedriver + 999774
+8   chromedriver                        0x000000010584cfb3 chromedriver + 872371
+9   chromedriver                        0x000000010581b5c2 chromedriver + 669122
+10  chromedriver                        0x000000010581c59e chromedriver + 673182
+11  chromedriver                        0x0000000105e02020 chromedriver + 6856736
+12  chromedriver                        0x0000000105e06050 chromedriver + 6873168
+13  chromedriver                        0x0000000105de43d7 chromedriver + 6734807
+14  chromedriver                        0x0000000105e069ee chromedriver + 6875630
+15  chromedriver                        0x0000000105dd3c14 chromedriver + 6667284
+16  chromedriver                        0x0000000105e23778 chromedriver + 6993784
+17  chromedriver                        0x0000000105e23936 chromedriver + 6994230
+18  chromedriver                        0x0000000105e34d18 chromedriver + 7064856
+19  libsystem_pthread.dylib             0x00007ff803de61d3 _pthread_start + 125
+20  libsystem_pthread.dylib             0x00007ff803de1bd3 thread_start + 15
+
+2025-01-03 17:37:33,632 - INFO - Відкриття сторінки трекінгу...
+2025-01-03 17:37:33,632 - INFO - Відкриття сторінки трекінгу...
+2025-01-03 17:37:34,577 - INFO - Введення номера накладної: 123456789
+2025-01-03 17:37:34,577 - INFO - Введення номера накладної: 123456789
+2025-01-03 17:37:55,355 - ERROR - Помилка при отриманні статусу: Message: 
+Stacktrace:
+0   chromedriver                        0x000000010d3ad268 chromedriver + 7098984
+1   chromedriver                        0x000000010d3a513a chromedriver + 7065914
+2   chromedriver                        0x000000010cd49d70 chromedriver + 400752
+3   chromedriver                        0x000000010cd98bd3 chromedriver + 723923
+4   chromedriver                        0x000000010cd98ed1 chromedriver + 724689
+5   chromedriver                        0x000000010cddee74 chromedriver + 1011316
+6   chromedriver                        0x000000010cdbd23d chromedriver + 873021
+7   chromedriver                        0x000000010cddc15e chromedriver + 999774
+8   chromedriver                        0x000000010cdbcfb3 chromedriver + 872371
+9   chromedriver                        0x000000010cd8b5c2 chromedriver + 669122
+10  chromedriver                        0x000000010cd8c59e chromedriver + 673182
+11  chromedriver                        0x000000010d372020 chromedriver + 6856736
+12  chromedriver                        0x000000010d376050 chromedriver + 6873168
+13  chromedriver                        0x000000010d3543d7 chromedriver + 6734807
+14  chromedriver                        0x000000010d3769ee chromedriver + 6875630
+15  chromedriver                        0x000000010d343c14 chromedriver + 6667284
+16  chromedriver                        0x000000010d393778 chromedriver + 6993784
+17  chromedriver                        0x000000010d393936 chromedriver + 6994230
+18  chromedriver                        0x000000010d3a4d18 chromedriver + 7064856
+19  libsystem_pthread.dylib             0x00007ff803de61d3 _pthread_start + 125
+20  libsystem_pthread.dylib             0x00007ff803de1bd3 thread_start + 15
+
+2025-01-03 17:37:55,355 - ERROR - Помилка при отриманні статусу: Message: 
+Stacktrace:
+0   chromedriver                        0x000000010d3ad268 chromedriver + 7098984
+1   chromedriver                        0x000000010d3a513a chromedriver + 7065914
+2   chromedriver                        0x000000010cd49d70 chromedriver + 400752
+3   chromedriver                        0x000000010cd98bd3 chromedriver + 723923
+4   chromedriver                        0x000000010cd98ed1 chromedriver + 724689
+5   chromedriver                        0x000000010cddee74 chromedriver + 1011316
+6   chromedriver                        0x000000010cdbd23d chromedriver + 873021
+7   chromedriver                        0x000000010cddc15e chromedriver + 999774
+8   chromedriver                        0x000000010cdbcfb3 chromedriver + 872371
+9   chromedriver                        0x000000010cd8b5c2 chromedriver + 669122
+10  chromedriver                        0x000000010cd8c59e chromedriver + 673182
+11  chromedriver                        0x000000010d372020 chromedriver + 6856736
+12  chromedriver                        0x000000010d376050 chromedriver + 6873168
+13  chromedriver                        0x000000010d3543d7 chromedriver + 6734807
+14  chromedriver                        0x000000010d3769ee chromedriver + 6875630
+15  chromedriver                        0x000000010d343c14 chromedriver + 6667284
+16  chromedriver                        0x000000010d393778 chromedriver + 6993784
+17  chromedriver                        0x000000010d393936 chromedriver + 6994230
+18  chromedriver                        0x000000010d3a4d18 chromedriver + 7064856
+19  libsystem_pthread.dylib             0x00007ff803de61d3 _pthread_start + 125
+20  libsystem_pthread.dylib             0x00007ff803de1bd3 thread_start + 15
+
