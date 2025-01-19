@@ -42,3 +42,4 @@ Thumbs.db
 # JetBrains IDE specific
 .idea/
 .idea/
+.DS_Store
