@@ -1,0 +1,8 @@
+version: '3'
+services:
+  tests:
+    build: .
+    volumes:
+      - ./allure-results:/test/allure-results
+    environment:
+      - PYTHONUNBUFFERED=1

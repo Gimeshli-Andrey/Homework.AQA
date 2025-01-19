@@ -6,8 +6,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование кода
+# Копирование исходного кода
 COPY . .
 
-# Команда запуск тестов
+# Запуск тестов
 CMD ["python", "-m", "unittest", "discover", "-v"]
