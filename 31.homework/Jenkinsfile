@@ -24,9 +24,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Запуск тестов в контейнере
-                // sh 'pytest --alluredir=allure-results'
-                // Или, если хотите запускать только один тест:
-                sh 'pytest --alluredir=allure-results tests/test_registration.py'
+                sh 'pytest --alluredir=allure-results'
             }
         }
 
@@ -42,11 +40,25 @@ pipeline {
     }
 
     post {
-        always {
-            // Отправка электронных писем с результатами тестирования
-            mail to: 'InsertYour@Mail.Here', // Замените на реальный email
-                 subject: "Jenkins Build - ${currentBuild.currentResult}",
-                 body: "Проверьте результаты тестирования: ${env.BUILD_URL}"
+        success {
+            // Отправка уведомления на email в случае успешной сборки
+            mail to: 'gimeshli.a@gmail.com',
+                 subject: "Build Successful: $JOB_NAME - Build # $BUILD_NUMBER",
+                 body: "The build was successful! View the results at $BUILD_URL"
+        }
+
+        failure {
+            // Отправка уведомления на email в случае неудачной сборки
+            mail to: 'gimeshli.a@gmail.com',
+                 subject: "Build Failed: $JOB_NAME - Build # $BUILD_NUMBER",
+                 body: "The build failed. Check the console output at $BUILD_URL for more details."
+        }
+
+        unstable {
+            // Отправка уведомления на email в случае нестабильной сборки
+            mail to: 'gimeshli.a@gmail.com',
+                 subject: "Build Unstable: $JOB_NAME - Build # $BUILD_NUMBER",
+                 body: "The build is unstable. Check the console output at $BUILD_URL for more details."
         }
     }
 }
