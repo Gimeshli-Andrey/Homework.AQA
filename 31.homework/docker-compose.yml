@@ -1,8 +1,13 @@
-version: '3'
+version: '3.8'
+
 services:
-  tests:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ./allure-results:/test/allure-results
+      - .:/app
     environment:
-      - PYTHONUNBUFFERED=1
+      - DISPLAY=:99
+    ports:
+      - "8080:8080"

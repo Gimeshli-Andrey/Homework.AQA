@@ -1,68 +1,45 @@
 pipeline {
     agent any
-    
-    environment {
-        DOCKER_IMAGE = 'ncase-tests'
-        EMAIL_RECIPIENT = 'InsertYour@Mail.Here'
-    }
-    
+
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // Извлечение кода из репозитория
+                git 'https://your-repo-url.git' // Замените на URL вашего репозитория
             }
         }
-        
-        stage('Build Docker Image') {
+
+        stage('Build and Run with Docker Compose') {
             steps {
-                script {
-                    docker.build(DOCKER_IMAGE)
-                }
+                // Запуск контейнеров с помощью docker-compose
+                sh 'docker-compose up --build -d'
             }
         }
-        
+
         stage('Run Tests') {
             steps {
-                script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'pytest -v --alluredir=allure-results'
-                    }
-                }
+                // Запуск тестов в контейнере
+                sh 'docker-compose exec app pytest --alluredir=allure-results tests/test_registration.py'
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                // Сбор результатов тестирования и их публикация в Jenkins
+                allure([
+                    results: [[path: 'allure-results']],
+                    report: 'allure-report'
+                ])
             }
         }
     }
-    
+
     post {
         always {
-            // Генерация отчета Allure
-            allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results']]
-            ])
-            
-            // Email notification
-            emailext (
-                subject: "NCASE Tests Status: ${currentBuild.result}",
-                body: """
-                    <p>Build Status: ${currentBuild.result}</p>
-                    <p>Build Number: ${BUILD_NUMBER}</p>
-                    <p>Check reports:</p>
-                    <ul>
-                        <li><a href='${BUILD_URL}allure'>Allure Report</a></li>
-                    </ul>
-                    
-                    <h3>Failed Tests (if any):</h3>
-                    <pre>${currentBuild.description ?: 'No failed tests'}</pre>
-                """,
-                to: env.EMAIL_RECIPIENT,
-                mimeType: 'text/html',
-                attachLog: true
-            )
-            
-            cleanWs()
+            // Отправка электронных писем с результатами тестирования
+            mail to: 'InsertYour@Mail.Here',
+                 subject: "Jenkins Build - ${currentBuild.currentResult}",
+                 body: "Проверьте результаты тестирования: ${env.BUILD_URL}"
         }
     }
 }
