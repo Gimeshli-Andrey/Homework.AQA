@@ -16,7 +16,7 @@
 
 Запуск Jenkins:
 
-# brew services start jenkins-lts
+# docker compose -f jenkins-docker-compose.yml up
 
 # http://localhost:8080
 

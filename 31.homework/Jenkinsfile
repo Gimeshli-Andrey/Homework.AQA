@@ -24,7 +24,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Запуск тестов в контейнере
-                sh 'pytest --alluredir=allure-results tests/test_registration.py'
+                sh 'pytest --alluredir=allure-results'
+                // Или, если хотите запускать только один тест:
+                // sh 'pytest --alluredir=allure-results tests/test_registration.py'
             }
         }
 
@@ -42,7 +44,7 @@ pipeline {
     post {
         always {
             // Отправка электронных писем с результатами тестирования
-            mail to: 'InsertYour@Mail.Here',
+            mail to: 'InsertYour@Mail.Here', // Замените на реальный email
                  subject: "Jenkins Build - ${currentBuild.currentResult}",
                  body: "Проверьте результаты тестирования: ${env.BUILD_URL}"
         }
