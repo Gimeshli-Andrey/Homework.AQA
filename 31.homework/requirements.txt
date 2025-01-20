@@ -1,0 +1,7 @@
+psycopg2-binary
+pytest
+python-dotenv
+allure-pytest
+selenium
+Faker
+pytest-allure
