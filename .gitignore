@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *.pyo
+*.log
+*.pyc
 
 # Virtual environment
 venv/
@@ -32,9 +34,6 @@ build/
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
-
-# MacOS specific
-.DS_Store
 
 # Windows specific
 Thumbs.db

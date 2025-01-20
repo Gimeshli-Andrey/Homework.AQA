@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /Users/gimeshli.a/Desktop/Homework.AQA/31.homework/jenkins_compose_data/jenkins_compose/jenkins_configuration:/jenkins_compose_data/jenkins_compose/jenkins_configuration
+    environment:
+      - DISPLAY=:99
+    ports:
+      - "8080:8080"
