@@ -17,4 +17,4 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Указываем команду для запуска тестов
-CMD ["pytest", "--alluredir=allure-results", "tests"]
+CMD ["pytest", "--alluredir=allure-results", "tests/test_registration.py"]

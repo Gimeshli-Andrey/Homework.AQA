@@ -7,7 +7,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
-      - /Users/gimeshli.a/Desktop/Homework.AQA/31.homework/jenkins_compose_data/jenkins_compose/jenkins_configuration:/jenkins_compose_data/jenkins_compose/jenkins_configuration
+      # Если вам нужно добавить том с конфигурациями, раскомментируйте следующую строку:
+       - /Users/gimeshli.a/Desktop/Homework.AQA/31.homework/jenkins_compose_data/jenkins_compose/jenkins_configuration:/jenkins_compose_data/jenkins_compose/jenkins_configuration
     environment:
       - DISPLAY=:99
     ports:
