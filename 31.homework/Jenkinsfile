@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.9' // Используйте образ Python, который вам нужен
-            args '-u root' // Добавьте аргументы, если нужно
+            image 'python:3.9'  // Образ Python
+            args '-u root'      // Запуск от имени root
         }
     }
 
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Извлечение кода из репозитория
-                git 'https://github.com/Gimeshli-Andrey/Homework.AQA.git' // Замените на URL вашего репозитория
+                git 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
             }
         }
 
@@ -23,18 +23,18 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Запуск тестов в контейнере
-                sh 'pytest --alluredir=allure-results'
+                // Установка PYTHONPATH и запуск тестов
+                sh 'PYTHONPATH=$WORKSPACE pytest --alluredir=allure-results'
             }
         }
 
         stage('Publish Test Results') {
             steps {
                 // Сбор результатов тестирования и их публикация в Jenkins
-                allure([
+                allure(
                     results: [[path: 'allure-results']],
                     report: 'allure-report'
-                ])
+                )
             }
         }
     }
