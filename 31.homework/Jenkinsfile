@@ -24,9 +24,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Запуск тестов в контейнере
-                sh 'pytest --alluredir=allure-results'
+                // sh 'pytest --alluredir=allure-results'
                 // Или, если хотите запускать только один тест:
-                // sh 'pytest --alluredir=allure-results tests/test_registration.py'
+                sh 'pytest --alluredir=allure-results tests/test_registration.py'
             }
         }
 
