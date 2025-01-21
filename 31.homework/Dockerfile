@@ -5,10 +5,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-<<<<<<< HEAD
-# Указываем команду для запуска тестов
-CMD ["pytest", "--alluredir=allure-results", "tests/test_registration.py"]
-=======
 # Установка Java (для Allure) и Node.js
 RUN apt-get update && \
     apt-get install -y openjdk-17-jre-headless curl gnupg2 lsb-release && \
@@ -26,4 +22,3 @@ COPY . .
 
 # Команда по умолчанию
 CMD ["pytest", "--alluredir=allure-results", "--disable-warnings"]
->>>>>>> 65c7bce (Temporary commit to save changes)
