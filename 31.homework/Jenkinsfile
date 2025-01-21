@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.9'  // Образ Python
-            args '-u root'      // Запуск от имени root
+            image 'python:3.9'   // Образ Python
+            args '-u root'       // Запуск от имени root
         }
     }
 
