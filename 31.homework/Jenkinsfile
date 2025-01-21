@@ -1,45 +1,85 @@
 pipeline {
+<<<<<<< HEAD
     agent {
         docker {
             image 'python:3.9'   // Образ Python
             args '-u root'       // Запуск от имени root
         }
+=======
+    agent any
+
+    environment {
+        // Визначення змінних середовища
+        PYTHON_VERSION = '3.9'
+        ALLURE_VERSION = '2.22.1'
+>>>>>>> 65c7bce (Temporary commit to save changes)
     }
 
     stages {
+        // Крок для вилучення коду з репозиторію
         stage('Checkout') {
             steps {
+<<<<<<< HEAD
                 // Извлечение кода из репозитория
                 git 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
+=======
+                // Вилучення коду з репозиторію
+                checkout scm
+>>>>>>> 65c7bce (Temporary commit to save changes)
             }
         }
 
+        // Крок для встановлення залежностей проекту
         stage('Install Dependencies') {
             steps {
-                // Установка зависимостей проекта
-                sh 'pip install -r requirements.txt'
+                sh '''
+                    python -m pip install --upgrade pip
+                    pip install -r requirements.txt
+                '''
             }
         }
 
+        // Крок для запуску автотестів
         stage('Run Tests') {
             steps {
+<<<<<<< HEAD
                 // Установка PYTHONPATH и запуск тестов
                 sh 'PYTHONPATH=$WORKSPACE pytest --alluredir=allure-results'
+=======
+                // Запуск тестів з використанням pytest та генерація звіту Allure
+                sh '''
+                    python -m pytest --alluredir=allure-results --disable-warnings
+                '''
+>>>>>>> 65c7bce (Temporary commit to save changes)
             }
         }
 
+        // Крок для збору результатів тестування та їх публікації у Jenkins
         stage('Publish Test Results') {
             steps {
+<<<<<<< HEAD
                 // Сбор результатов тестирования и их публикация в Jenkins
                 allure(
                     results: [[path: 'allure-results']],
                     report: 'allure-report'
                 )
+=======
+                // Публікація результатів тестів з використанням Allure
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+                ])
+>>>>>>> 65c7bce (Temporary commit to save changes)
             }
         }
     }
 
+    // Налаштування дій після виконання пайплайну
     post {
+<<<<<<< HEAD
         success {
             // Отправка уведомления на email в случае успешной сборки
             mail to: 'gimeshli.a@gmail.com',
@@ -59,6 +99,25 @@ pipeline {
             mail to: 'gimeshli.a@gmail.com',
                  subject: "Build Unstable: $JOB_NAME - Build # $BUILD_NUMBER",
                  body: "The build is unstable. Check the console output at $BUILD_URL for more details."
+=======
+        always {
+            // Відправка email з результатами тестування
+            emailext (
+                to: 'InsertYour@Mail.Here',
+                subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """
+                    <p>Статус збірки: ${currentBuild.currentResult}</p>
+                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
+                    <p>Переглянути лог збірки: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
+                    <p>Звіт тестування Allure: <a href='${env.BUILD_URL}allure'>Allure Report</a></p>
+                """,
+                mimeType: 'text/html',
+                attachLog: true
+            )
+
+            // Очищення робочої області
+            cleanWs()
+>>>>>>> 65c7bce (Temporary commit to save changes)
         }
     }
 }

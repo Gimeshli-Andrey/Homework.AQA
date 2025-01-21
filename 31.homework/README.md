@@ -16,12 +16,12 @@
 
 Запуск Jenkins:
 
-# docker compose -f jenkins-docker-compose.yml up
+# docker compose -f jenkins-docker-compose.yml up --build -d
+
+Отключить контейнер:
+
+# docker compose -f jenkins-docker-compose.yml down
 
 # http://localhost:8080
 
 # cat /Users/$(whoami)/.jenkins/secrets/initialAdminPassword
-
-Остановка Jenkins:
-
-# brew services stop jenkins-lts
