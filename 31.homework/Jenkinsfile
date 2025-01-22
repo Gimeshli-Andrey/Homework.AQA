@@ -2,31 +2,27 @@ pipeline {
     agent any
 
     stages {
-        // Крок для вилучення коду з репозиторію
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        // Крок для встановлення залежностей проекту
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    python3 -m pip install --user --upgrade pip
-                    python3 -m pip install --user -r requirements.txt
+                    /usr/bin/python3 -m pip install --user --upgrade pip
+                    /usr/bin/python3 -m pip install --user -r requirements.txt
                 '''
             }
         }
 
-        // Крок для запуску автотестів
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest --alluredir=allure-results --disable-warnings'
+                sh '/usr/bin/python3 -m pytest --alluredir=allure-results --disable-warnings'
             }
         }
 
-        // Крок для збору результатів тестування та їх публікації у Jenkins
         stage('Publish Test Results') {
             steps {
                 allure([
@@ -42,7 +38,6 @@ pipeline {
 
     post {
         always {
-            // Надсилання результатів тестування на email
             emailext (
                 to: 'InsertYour@Mail.Here',
                 subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
