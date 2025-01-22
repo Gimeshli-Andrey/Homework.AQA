@@ -1,41 +1,32 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9'
-            args '-u root'
-        }
-    }
+    agent any
 
     stages {
+        // Крок для вилучення коду з репозиторію
         stage('Checkout') {
             steps {
                 checkout scm
-                git 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
             }
         }
 
+        // Крок для встановлення залежностей проекту
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    python -m pip install --upgrade pip
-                    pip install -r requirements.txt
+                    python3 -m pip install --user --upgrade pip
+                    python3 -m pip install --user -r requirements.txt
                 '''
             }
         }
 
+        // Крок для запуску автотестів
         stage('Run Tests') {
             steps {
-                script {
-                    try {
-                        sh 'python -m pytest --alluredir=allure-results --disable-warnings'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw e
-                    }
-                }
+                sh 'python3 -m pytest --alluredir=allure-results --disable-warnings'
             }
         }
 
+        // Крок для збору результатів тестування та їх публікації у Jenkins
         stage('Publish Test Results') {
             steps {
                 allure([
@@ -51,22 +42,19 @@ pipeline {
 
     post {
         always {
+            // Надсилання результатів тестування на email
             emailext (
                 to: 'InsertYour@Mail.Here',
-                subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """
                     <p>Статус збірки: ${currentBuild.currentResult}</p>
                     <p>Номер збірки: ${env.BUILD_NUMBER}</p>
-                    <p>Переглянути лог збірки: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
-                    <p>Звіт тестування Allure: <a href='${env.BUILD_URL}allure'>Allure Report</a></p>
+                    <p>Переглянути результати: ${env.BUILD_URL}</p>
+                    <p>Звіт тестування Allure: ${env.BUILD_URL}allure</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
-        }
-
-        cleanup {
-            cleanWs()
         }
     }
 }
