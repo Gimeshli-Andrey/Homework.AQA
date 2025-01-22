@@ -73,8 +73,13 @@ pipeline {
                 mimeType: 'text/html',
                 attachLog: true
             )
+<<<<<<< HEAD
 
             // Очищення робочої області після завершення пайплайна
+=======
+            
+            // Очищення робочої області
+>>>>>>> dda36fd9730a294d469a9ab81f400fc8b4b7f72d
             cleanWs()
         }
     }
