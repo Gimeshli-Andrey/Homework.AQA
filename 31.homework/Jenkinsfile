@@ -20,8 +20,9 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    python3 -m pip install --upgrade pip  # Используйте python3, так как у вас версия 3.12.6
-                    pip3 install -r requirements.txt
+                    python3 --version  # Проверим версию Python
+                    python3 -m pip install --upgrade pip  # Обновим pip
+                    python3 -m pip install -r requirements.txt  # Устанавливаем зависимости
                 '''
             }
         }
@@ -31,7 +32,7 @@ pipeline {
             steps {
                 // Запуск тестів з використанням pytest та генерація звіту Allure
                 sh '''
-                    python3 -m pytest --alluredir=allure-results --disable-warnings  # Используйте python3
+                    python3 -m pytest --alluredir=allure-results --disable-warnings  # Используем python3
                 '''
             }
         }
