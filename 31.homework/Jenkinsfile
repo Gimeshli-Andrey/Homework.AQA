@@ -18,16 +18,15 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    # Перевірка чи встановлений Python
-                    python3 --version || { echo "Python 3 is not installed, installing now..."; sudo apt-get update && sudo apt-get install -y python3 python3-pip; python3 --version; }
-
-                    # Перевірка чи встановлений pip
-                    python3 -m pip --version || { echo "pip is not installed, installing now..."; sudo apt-get install -y python3-pip; }
-
-                    # Оновлення pip
+                    # Проверим, установлен ли Python
+                    if ! command -v python3 &>/dev/null; then
+                        echo "Python 3 не найден. Устанавливаем Python 3..."
+                        apt-get update -y
+                        apt-get install -y python3 python3-pip
+                    fi
+                    
+                    # Установка зависимостей
                     python3 -m pip install --upgrade pip
-
-                    # Встановлення залежностей з requirements.txt
                     python3 -m pip install -r requirements.txt
                 '''
             }
@@ -74,7 +73,7 @@ pipeline {
                 attachLog: true
             )
             
-            // Очищення робочої області після завершення пайплайна
+            // Очищення робочої області
             cleanWs()
         }
     }
