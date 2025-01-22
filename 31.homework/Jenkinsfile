@@ -2,36 +2,48 @@ pipeline {
     agent any
 
     environment {
-        PYTHON_VERSION = '3.12.6'  // Обновленная версия Python
-        ALLURE_VERSION = '2.22.1'
+        PYTHON_VERSION = '3.9' // Версия Python
+        ALLURE_VERSION = '2.22.1' // Версия Allure
     }
 
     stages {
+        // Крок для вилучення коду з репозиторію
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout scm // Вилучення коду з репозиторію
             }
         }
 
-        stage('Install Python and Dependencies') {
+        // Крок для встановлення залежностей проекту
+        stage('Install Dependencies') {
             steps {
                 sh '''
-                    # Проверяем, установлен ли Python
+                    # Перевірка чи встановлений Python
                     python3 --version || { echo "Python 3 is not installed, installing now..."; sudo apt-get update && sudo apt-get install -y python3 python3-pip; python3 --version; }
+
+                    # Перевірка чи встановлений pip
+                    python3 -m pip --version || { echo "pip is not installed, installing now..."; sudo apt-get install -y python3-pip; }
+
+                    # Оновлення pip
                     python3 -m pip install --upgrade pip
+
+                    # Встановлення залежностей з requirements.txt
                     python3 -m pip install -r requirements.txt
                 '''
             }
         }
 
+        // Крок для запуску автотестів
         stage('Run Tests') {
             steps {
                 sh '''
+                    # Запуск тестів з використанням pytest
                     python3 -m pytest --alluredir=allure-results --disable-warnings
                 '''
             }
         }
 
+        // Крок для збору результатів тестування та їх публікації у Jenkins
         stage('Publish Test Results') {
             steps {
                 allure([
@@ -39,16 +51,18 @@ pipeline {
                     jdk: '',
                     properties: [],
                     reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
+                    results: [[path: 'allure-results']] // Публікація результатів тестів через Allure
                 ])
             }
         }
     }
 
+    // Налаштування дій після виконання пайплайну
     post {
         always {
+            // Відправка email з результатами тестування
             emailext (
-                to: 'InsertYour@Mail.Here',
+                to: 'gimeshli.a@gmail.com', // Пошта Гілеля
                 subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """
                     <p>Статус збірки: ${currentBuild.currentResult}</p>
@@ -59,8 +73,13 @@ pipeline {
                 mimeType: 'text/html',
                 attachLog: true
             )
+<<<<<<< HEAD
+
+            // Очищення робочої області після завершення пайплайна
+=======
             
             // Очищення робочої області
+>>>>>>> dda36fd9730a294d469a9ab81f400fc8b4b7f72d
             cleanWs()
         }
     }
