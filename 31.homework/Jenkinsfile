@@ -2,45 +2,38 @@ pipeline {
     agent any
 
     environment {
-        // Визначення змінних середовища
-        PYTHON_VERSION = '3.12.6'  // Обновлена версия Python
+        PYTHON_VERSION = '3.12.6'  // Обновленная версия Python
         ALLURE_VERSION = '2.22.1'
     }
 
     stages {
-        // Крок для вилучення коду з репозиторію
         stage('Checkout') {
             steps {
-                // Вилучення коду з репозиторію
                 checkout scm
             }
         }
 
-        // Крок для встановлення залежностей проекту
-        stage('Install Dependencies') {
+        stage('Install Python and Dependencies') {
             steps {
                 sh '''
-                    python3 --version  # Проверим версию Python
-                    python3 -m pip install --upgrade pip  # Обновим pip
-                    python3 -m pip install -r requirements.txt  # Устанавливаем зависимости
+                    # Проверяем, установлен ли Python
+                    python3 --version || { echo "Python 3 is not installed, installing now..."; sudo apt-get update && sudo apt-get install -y python3 python3-pip; python3 --version; }
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -r requirements.txt
                 '''
             }
         }
 
-        // Крок для запуску автотестів
         stage('Run Tests') {
             steps {
-                // Запуск тестів з використанням pytest та генерація звіту Allure
                 sh '''
-                    python3 -m pytest --alluredir=allure-results --disable-warnings  # Используем python3
+                    python3 -m pytest --alluredir=allure-results --disable-warnings
                 '''
             }
         }
 
-        // Крок для збору результатів тестування та їх публікації у Jenkins
         stage('Publish Test Results') {
             steps {
-                // Публікація результатів тестів з використанням Allure
                 allure([
                     includeProperties: false,
                     jdk: '',
@@ -52,10 +45,8 @@ pipeline {
         }
     }
 
-    // Налаштування дій після виконання пайплайну
     post {
         always {
-            // Відправка email з результатами тестування
             emailext (
                 to: 'InsertYour@Mail.Here',
                 subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
