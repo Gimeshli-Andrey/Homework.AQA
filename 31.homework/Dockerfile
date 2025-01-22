@@ -1,12 +1,9 @@
-# Используем базовый образ с Python 3.12
-FROM python:3.12-slim
+FROM python:3.9-slim
 
 # Установка зависимостей для проекта
 WORKDIR /app
 COPY requirements.txt .
-
-# Установка зависимостей проекта
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Установка Java (для Allure) и Node.js
 RUN apt-get update && \
@@ -23,5 +20,5 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 # Копирование всех файлов проекта
 COPY . .
 
-# Команда по умолчанию для запуска тестов
-CMD ["python3", "-m", "pytest", "--alluredir=allure-results", "--disable-warnings"]
+# Команда по умолчанию
+CMD ["pytest", "--alluredir=allure-results", "--disable-warnings"]
