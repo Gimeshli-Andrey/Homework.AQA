@@ -59,6 +59,8 @@ pipeline {
                 mimeType: 'text/html',
                 attachLog: true
             )
+            
+            // Очищення робочої області
             cleanWs()
         }
     }
