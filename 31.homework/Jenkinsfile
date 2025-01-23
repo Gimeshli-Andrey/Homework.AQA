@@ -1,50 +1,48 @@
 pipeline {
-    agent {
-        docker {
-            filename 'Dockerfile'
-            args '-v $PWD:/app'
-        }
-    }
+    agent any
 
     environment {
         EMAIL_RECIPIENT = 'InsertYour@Mail.Here'
+        VENV_PATH = "${WORKSPACE}/venv"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'main', 
+                    url: 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
+                
+                sh 'cd 31.homework'
             }
         }
 
-        stage('Install Python') {
+        stage('Настройка Python') {
             steps {
                 sh '''
-                    apt-get update
-                    apt-get install -y python3 python3-dev
-                    apt-get install -y python3-pip
-                    apt-get install -y python3.11-venv
-                    rm -rf venv
+                    cd 31.homework
                     python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
                 '''
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Установка зависимостей') {
             steps {
-                sh '''#!/bin/bash
-                source venv/bin/activate
-                pip install --upgrade pip
-                pip install -r requirements.txt
+                sh '''
+                    cd 31.homework
+                    . venv/bin/activate
+                    pip install -r requirements.txt
                 '''
             }
         }
 
-        stage('Run Tests') {
+        stage('Запуск тестов') {
             steps {
-                sh '''#!/bin/bash
-                source venv/bin/activate
-                python3 -m pytest --alluredir=allure-results --disable-warnings --junitxml=test-results.xml
+                sh '''
+                    cd 31.homework
+                    . venv/bin/activate
+                    python3 -m pytest --alluredir=allure-results --junitxml=test-results.xml tests/
                 '''
             }
             post {
@@ -54,13 +52,15 @@ pipeline {
             }
         }
 
-        stage('Publish Test Results') {
+        stage('Генерация Allure отчета') {
             steps {
-                allure([
-                    includeProperties: false,
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
-                ])
+                script {
+                    allure([
+                        includeProperties: false,
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'allure-results']]
+                    ])
+                }
             }
         }
     }
@@ -69,17 +69,20 @@ pipeline {
         always {
             emailext (
                 to: "${EMAIL_RECIPIENT}",
-                subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                subject: "Результат сборки ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """
-                    <p>Статус сборки: ${currentBuild.currentResult}</p>
+                    <p>Статус: ${currentBuild.currentResult}</p>
                     <p>Номер сборки: ${env.BUILD_NUMBER}</p>
-                    <p>Просмотреть результаты: ${env.BUILD_URL}</p>
-                    <p>Отчет тестирования Allure: ${env.BUILD_URL}allure</p>
+                    <p>URL сборки: ${env.BUILD_URL}</p>
+                    <p>Отчет Allure: ${env.BUILD_URL}allure</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
+            
+            sh 'rm -rf venv'
         }
+        
         cleanup {
             deleteDir()
         }
