@@ -1,12 +1,41 @@
 services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=testdb
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
     volumes:
       - .:/app
-       - /Users/gimeshli.a/Desktop/Homework.AQA/31.homework/jenkins_compose_data/jenkins_compose/jenkins_configuration:/jenkins_compose_data/jenkins_compose/jenkins_configuration
-    environment:
-      - DISPLAY=:99
-    ports:
-      - "8080:8080"
+      - allure-results:/app/allure-results
+    command: >
+      sh -c "pytest --alluredir=allure-results 
+      --disable-warnings 
+      --junitxml=test-results.xml"
+
+volumes:
+  postgres_data:
+  allure-results:
