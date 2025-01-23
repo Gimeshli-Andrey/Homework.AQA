@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            filename 'Dockerfile'
+            args '-v $PWD:/app'
+        }
+    }
 
     stages {
         stage('Checkout') {
@@ -11,15 +16,22 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    /usr/bin/python3 -m pip install --user --upgrade pip
-                    /usr/bin/python3 -m pip install --user -r requirements.txt
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh '/usr/bin/python3 -m pytest --alluredir=allure-results --disable-warnings'
+                sh '''
+                    python3 -m pytest --alluredir=allure-results --disable-warnings
+                '''
+            }
+            post {
+                always {
+                    junit 'test-results/*.xml'
+                }
             }
         }
 
@@ -27,8 +39,6 @@ pipeline {
             steps {
                 allure([
                     includeProperties: false,
-                    jdk: '',
-                    properties: [],
                     reportBuildPolicy: 'ALWAYS',
                     results: [[path: 'allure-results']]
                 ])
@@ -42,14 +52,17 @@ pipeline {
                 to: 'InsertYour@Mail.Here',
                 subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """
-                    <p>Статус збірки: ${currentBuild.currentResult}</p>
-                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
-                    <p>Переглянути результати: ${env.BUILD_URL}</p>
-                    <p>Звіт тестування Allure: ${env.BUILD_URL}allure</p>
+                    <p>Статус сборки: ${currentBuild.currentResult}</p>
+                    <p>Номер сборки: ${env.BUILD_NUMBER}</p>
+                    <p>Просмотреть результаты: ${env.BUILD_URL}</p>
+                    <p>Отчет тестирования Allure: ${env.BUILD_URL}allure</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
+        }
+        cleanup {
+            deleteDir()
         }
     }
 }
