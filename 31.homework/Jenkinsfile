@@ -1,37 +1,47 @@
 pipeline {
     agent any
 
+    environment {
+        EMAIL_RECIPIENT = 'gimeshli.a@gmail.com'
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', 
+                git branch: 'main',
                     url: 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
             }
         }
 
-        stage('Run Tests') {
+        stage('Запуск контейнерів') {
             steps {
-                dir('31.homework') {
-                    sh 'docker-compose run app pytest tests/test_database.py -v'
+                script {
+                    // Запуск контейнерів
+                    sh 'docker-compose up --build -d'
+                }
+            }
+        }
+
+        stage('Запуск тестів') {
+            steps {
+                script {
+                    // Запуск тестів у контейнері
+                    sh 'docker-compose run app pytest --alluredir=allure-results --disable-warnings'
                 }
             }
             post {
                 always {
+                    // Збір результатів тестування
                     junit 'test-results.xml'
                 }
             }
         }
 
-        stage('Generate Allure Report') {
+        stage('Генерація Allure звіту') {
             steps {
-                dir('31.homework') {
-                    script {
-                        allure([
-                            includeProperties: false,
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'allure-results']]
-                        ])
-                    }
+                script {
+                    // Генерація звіту Allure
+                    sh 'docker-compose run app allure serve allure-results'
                 }
             }
         }
@@ -40,17 +50,21 @@ pipeline {
     post {
         always {
             emailext (
-                subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                to: "${EMAIL_RECIPIENT}",
+                subject: "Результат збірки ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """
                     <p>Статус: ${currentBuild.currentResult}</p>
-                    <p>Номер сборки: ${env.BUILD_NUMBER}</p>
-                    <p>URL сборки: ${env.BUILD_URL}</p>
+                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
+                    <p>URL збірки: ${env.BUILD_URL}</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
+
+            // Зупинка та видалення контейнерів
+            sh 'docker-compose down'
         }
-        
+
         cleanup {
             deleteDir()
         }
