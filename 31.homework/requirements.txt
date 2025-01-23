@@ -1,4 +1,6 @@
 psycopg2-binary==2.9.9
-pytest==7.4.0
+pytest==7.4.3
 python-dotenv==1.0.0
-allure-pytest==2.13.0
+allure-pytest==2.13.2
+pytest-html==4.1.1
+pytest-cov==4.1.0

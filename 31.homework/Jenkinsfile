@@ -1,38 +1,48 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            filename 'Dockerfile'
+            args '-v $PWD:/app'
+        }
+    }
+
+    environment {
+        EMAIL_RECIPIENT = 'InsertYour@Mail.Here'
+    }
 
     stages {
-        // Крок для вилучення коду з репозиторію
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        // Крок для встановлення залежностей проекту
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    python3 -m pip install --user --upgrade pip
-                    python3 -m pip install --user -r requirements.txt
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -r requirements.txt
                 '''
             }
         }
 
-        // Крок для запуску автотестів
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest --alluredir=allure-results --disable-warnings'
+                sh '''
+                    python3 -m pytest --alluredir=allure-results --disable-warnings --junitxml=test-results.xml
+                '''
+            }
+            post {
+                always {
+                    junit 'test-results.xml'
+                }
             }
         }
 
-        // Крок для збору результатів тестування та їх публікації у Jenkins
         stage('Publish Test Results') {
             steps {
                 allure([
                     includeProperties: false,
-                    jdk: '',
-                    properties: [],
                     reportBuildPolicy: 'ALWAYS',
                     results: [[path: 'allure-results']]
                 ])
@@ -42,19 +52,21 @@ pipeline {
 
     post {
         always {
-            // Надсилання результатів тестування на email
             emailext (
-                to: 'InsertYour@Mail.Here',
+                to: "${EMAIL_RECIPIENT}",
                 subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """
-                    <p>Статус збірки: ${currentBuild.currentResult}</p>
-                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
-                    <p>Переглянути результати: ${env.BUILD_URL}</p>
-                    <p>Звіт тестування Allure: ${env.BUILD_URL}allure</p>
+                    <p>Статус сборки: ${currentBuild.currentResult}</p>
+                    <p>Номер сборки: ${env.BUILD_NUMBER}</p>
+                    <p>Просмотреть результаты: ${env.BUILD_URL}</p>
+                    <p>Отчет тестирования Allure: ${env.BUILD_URL}allure</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
+        }
+        cleanup {
+            deleteDir()
         }
     }
 }
