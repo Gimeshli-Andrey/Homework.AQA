@@ -24,12 +24,14 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-                script {
-                    allure([
-                        includeProperties: false,
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'allure-results']]
-                    ])
+                dir('31.homework') {
+                    script {
+                        allure([
+                            includeProperties: false,
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'allure-results']]
+                        ])
+                    }
                 }
             }
         }
@@ -40,13 +42,17 @@ pipeline {
             emailext (
                 subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """
-                    <p>Status: ${currentBuild.currentResult}</p>
-                    <p>Build Number: ${env.BUILD_NUMBER}</p>
-                    <p>Build URL: ${env.BUILD_URL}</p>
+                    <p>Статус: ${currentBuild.currentResult}</p>
+                    <p>Номер сборки: ${env.BUILD_NUMBER}</p>
+                    <p>URL сборки: ${env.BUILD_URL}</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
+        }
+        
+        cleanup {
+            deleteDir()
         }
     }
 }
