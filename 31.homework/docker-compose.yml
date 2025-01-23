@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   postgres:
     image: postgres:13
@@ -11,14 +13,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     depends_on:
       postgres:
         condition: service_healthy
@@ -30,12 +30,7 @@ services:
       - DB_PORT=5432
     volumes:
       - .:/app
-      - allure-results:/app/allure-results
-    command: >
-      sh -c "pytest --alluredir=allure-results 
-      --disable-warnings 
-      --junitxml=test-results.xml"
+    command: sh -c "pytest --alluredir=allure-results --disable-warnings && tail -f /dev/null"
 
 volumes:
   postgres_data:
-  allure-results:

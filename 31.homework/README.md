@@ -4,11 +4,17 @@
 
 Запуск тестов:
 
-# docker-compose run app python -m unittest discover -v
+# docker-compose run app pytest -v
 
 Просмотр логов:
 
 # docker-compose logs -f app
+
+Просмотр логов:
+
+# docker-compose logs -f app
+
+# allure serve allure-results
 
 Остановка контейнера:
 
@@ -24,4 +30,5 @@
 
 # http://localhost:8080
 
-# cat /Users/$(whoami)/.jenkins/secrets/initialAdminPassword
+
+# ngrok http 8080

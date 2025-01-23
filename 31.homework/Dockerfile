@@ -1,28 +1,23 @@
 FROM python:3.9-slim
 
+# Установка зависимостей для проекта
 WORKDIR /app
-
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Установка системных зависимостей, Java, Node.js, и Allure
+# Установка Java (для Allure) и Node.js
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends openjdk-17-jre-headless curl gnupg2 lsb-release && \
-    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
-    apt-get install -y --no-install-recommends nodejs && \
+    apt-get install -y openjdk-17-jre-headless curl gnupg2 lsb-release && \
+    apt-get install -y nodejs npm && \
     npm install -g allure-commandline && \
-    pip install --no-cache-dir -r requirements.txt && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean
 
-# Установка JAVA_HOME и PATH
+# Установка JAVA_HOME и добавление пути Allure в PATH
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
+# Копирование всех файлов проекта
 COPY . .
 
-# Окружение Python
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
-
-ENTRYPOINT ["pytest"]
-CMD ["--alluredir=allure-results", "--disable-warnings"]
+# Команда по умолчанию
+CMD ["pytest", "--alluredir=allure-results", "--disable-warnings"]
