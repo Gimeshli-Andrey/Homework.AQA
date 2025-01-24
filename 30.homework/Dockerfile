@@ -8,8 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Установка Java (для Allure) и Node.js
 RUN apt-get update && \
     apt-get install -y openjdk-17-jre-headless curl gnupg2 lsb-release && \
-    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs && \
+    apt-get install -y nodejs npm && \
     npm install -g allure-commandline && \
     apt-get clean
 
