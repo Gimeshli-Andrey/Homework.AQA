@@ -10,10 +10,6 @@
 
 # docker-compose logs -f app
 
-Просмотр логов:
-
-# docker-compose logs -f app
-
 # allure serve allure-results
 
 Остановка контейнера:

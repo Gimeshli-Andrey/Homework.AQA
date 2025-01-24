@@ -13,35 +13,37 @@ pipeline {
             }
         }
 
-        stage('Запуск контейнерів') {
+        stage('Pull Dependencies') {
             steps {
-                script {
-                    // Запуск контейнерів
-                    sh 'docker-compose up --build -d'
+                dir('31.homework') {
+                    sh 'docker-compose pull'
                 }
             }
         }
 
-        stage('Запуск тестів') {
+        stage('Run Tests') {
             steps {
-                script {
-                    // Запуск тестів у контейнері
-                    sh 'docker-compose run app pytest --alluredir=allure-results --disable-warnings'
+                dir('31.homework') {
+                    sh 'docker-compose run app pytest --alluredir=allure-results --disable-warnings --junitxml=test-results.xml' // Запуск тестів
                 }
             }
             post {
                 always {
-                    // Збір результатів тестування
-                    junit 'test-results.xml'
+                    junit '31.homework/test-results.xml'
                 }
             }
         }
 
-        stage('Генерація Allure звіту') {
+        stage('Generate Allure Report') {
             steps {
-                script {
-                    // Генерація звіту Allure
-                    sh 'docker-compose run app allure serve allure-results'
+                dir('31.homework') {
+                    script {
+                        allure([
+                            includeProperties: false,
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'allure-results']]
+                        ])
+                    }
                 }
             }
         }
@@ -51,7 +53,7 @@ pipeline {
         always {
             emailext (
                 to: "${EMAIL_RECIPIENT}",
-                subject: "Результат збірки ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                subject: "Результат збірки ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """
                     <p>Статус: ${currentBuild.currentResult}</p>
                     <p>Номер збірки: ${env.BUILD_NUMBER}</p>
@@ -61,7 +63,6 @@ pipeline {
                 attachLog: true
             )
 
-            // Зупинка та видалення контейнерів
             sh 'docker-compose down'
         }
 

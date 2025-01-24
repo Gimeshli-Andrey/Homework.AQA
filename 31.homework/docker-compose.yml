@@ -16,6 +16,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    restart: always
 
   app:
     build: .
@@ -31,6 +32,7 @@ services:
     volumes:
       - .:/app
     command: sh -c "pytest --alluredir=allure-results --disable-warnings && tail -f /dev/null"
+    restart: always
 
 volumes:
   postgres_data:
