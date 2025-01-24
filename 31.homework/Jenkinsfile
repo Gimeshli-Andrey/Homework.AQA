@@ -24,12 +24,12 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir('31.homework') {
-                    sh 'docker-compose run --rm app pytest tests/test_database.py --maxfail=5 --disable-warnings -v --junitxml=test-results.xml'
+                    sh 'docker-compose run --rm app pytest tests/test_database.py --maxfail=5 --disable-warnings -v --junitxml=allure-results/test-results.xml'
                 }
             }
             post {
                 always {
-                    junit '31.homework/test-results.xml'
+                    junit '31.homework/allure-results/test-results.xml'
                 }
             }
         }
@@ -56,8 +56,8 @@ pipeline {
                 subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """
                     <p>Статус: ${currentBuild.currentResult}</p>
-                    <p>Номер сборки: ${env.BUILD_NUMBER}</p>
-                    <p>URL сборки: ${env.BUILD_URL}</p>
+                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
+                    <p>URL збірки: ${env.BUILD_URL}</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
@@ -66,6 +66,12 @@ pipeline {
 
         cleanup {
             deleteDir()
+        }
+
+        failure {
+            script {
+                echo "КРИТИЧНО: Збірка не вдалася."
+            }
         }
     }
 }

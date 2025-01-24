@@ -2,3 +2,5 @@ psycopg2-binary==2.9.9
 pytest==7.4.0
 python-dotenv==1.0.0
 allure-pytest==2.13.0
+pylint==3.0.3
+flake8==7.0.0
