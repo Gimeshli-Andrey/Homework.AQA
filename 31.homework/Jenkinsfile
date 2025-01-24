@@ -13,10 +13,10 @@ pipeline {
             }
         }
 
-        stage('Pull Dependencies') {
+        stage('Install Dependencies') {
             steps {
                 dir('31.homework') {
-                    sh 'docker-compose pull'
+                    sh 'pip install -r requirements.txt'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir('31.homework') {
-                    sh 'docker-compose run app pytest --alluredir=allure-results --disable-warnings --junitxml=test-results.xml' // Запуск тестів
+                    sh 'docker-compose run --rm app pytest tests/test_database.py --maxfail=5 --disable-warnings -v --junitxml=test-results.xml'
                 }
             }
             post {
@@ -53,17 +53,15 @@ pipeline {
         always {
             emailext (
                 to: "${EMAIL_RECIPIENT}",
-                subject: "Результат збірки ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """
                     <p>Статус: ${currentBuild.currentResult}</p>
-                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
-                    <p>URL збірки: ${env.BUILD_URL}</p>
+                    <p>Номер сборки: ${env.BUILD_NUMBER}</p>
+                    <p>URL сборки: ${env.BUILD_URL}</p>
                 """,
                 mimeType: 'text/html',
                 attachLog: true
             )
-
-            sh 'docker-compose down'
         }
 
         cleanup {
