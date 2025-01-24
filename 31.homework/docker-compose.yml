@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:13
@@ -33,6 +31,8 @@ services:
       - .:/app
     command: sh -c "pytest --alluredir=allure-results --disable-warnings && tail -f /dev/null"
     restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   postgres_data:
