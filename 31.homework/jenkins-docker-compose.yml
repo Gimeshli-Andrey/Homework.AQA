@@ -10,4 +10,4 @@ services:
     container_name: jenkins
     volumes:
       - /Users/gimeshli.a/Desktop/Homework.AQA/jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /Users/gimeshli.a/.docker/run/docker.sock:/var/run/docker.sock
