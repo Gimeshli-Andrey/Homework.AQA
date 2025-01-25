@@ -1,20 +1,10 @@
-Запуск контейнера:
-
-# docker-compose up --build -d
-
 Запуск тестов:
 
-# docker-compose run app pytest -v
+# pytest tests/test_app.py --alluredir=allure-results
 
 Просмотр логов:
 
-# docker-compose logs -f app
-
 # allure serve allure-results
-
-Остановка контейнера:
-
-# docker-compose down
 
 Запуск Jenkins:
 
