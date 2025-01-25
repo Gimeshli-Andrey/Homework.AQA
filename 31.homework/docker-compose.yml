@@ -28,7 +28,15 @@ services:
       - DB_PORT=5432
     volumes:
       - .:/app
-    command: sh -c "pytest --alluredir=allure-results --disable-warnings && tail -f /dev/null"
+      - allure_results:/app/allure-results
+    command: |
+      sh -c "
+        echo 'Установка зависимостей...'
+        pip install -r requirements.txt &&
+        echo 'Запуск тестов...'
+        pytest --alluredir=/app/allure-results --disable-warnings && tail -f /dev/null
+      "
 
 volumes:
   postgres_data:
+  allure_results:
