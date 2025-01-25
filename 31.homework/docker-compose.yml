@@ -1,4 +1,3 @@
-version: '3'
 services:
   postgres:
     image: postgres:13
@@ -29,7 +28,7 @@ services:
       - DB_PORT=5432
     volumes:
       - .:/app
-    command: sh -c "pytest --alluredir=allure-results --disable-warnings"
+    command: sh -c "pytest --alluredir=allure-results --disable-warnings && tail -f /dev/null"
 
 volumes:
   postgres_data:
