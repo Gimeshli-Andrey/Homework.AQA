@@ -1,3 +1,4 @@
+version: '3'
 services:
   postgres:
     image: postgres:13
@@ -14,7 +15,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    restart: always
 
   app:
     build: .
@@ -29,10 +29,7 @@ services:
       - DB_PORT=5432
     volumes:
       - .:/app
-    command: sh -c "pytest --alluredir=allure-results --disable-warnings && tail -f /dev/null"
-    restart: always
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    command: sh -c "pytest --alluredir=allure-results --disable-warnings"
 
 volumes:
   postgres_data:
