@@ -42,20 +42,12 @@ pipeline {
             }
         }
 
-        stage('Docker Tests') {
+        stage('Run tests') {
             steps {
                 dir("${env.PROJECT_DIR}") {
                     sh '''#!/bin/bash
-                        if ! command -v docker-compose &> /dev/null; then
-                            echo "Ошибка: docker-compose не установлен или недоступен!"
-                            exit 1
-                        fi
-                        echo "Запуск контейнера с использованием docker-compose..."
-                        docker-compose up --build -d
-                        echo "Запуск тестов в контейнере..."
-                        docker-compose run --rm app pytest -v --maxfail=5 --disable-warnings --alluredir=allure-results
-                        echo "Генерация отчета Allure..."
-                        docker-compose run --rm app allure generate allure-results --output ${PROJECT_DIR}/allure-report
+                        source venv/bin/activate
+                        pytest -m ${pytest_mark}  --alluredir=allure-results
                     '''
                 }
             }
