@@ -2,48 +2,73 @@ pipeline {
     agent any
 
     environment {
-        EMAIL_RECIPIENT = 'gimeshli.a@gmail.com'
+        PROJECT_DIR = '31.homework'
+        VENV_NAME = 'venv'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
+                echo "Клонирование кода из репозитория..."
+                git branch: 'main', url: 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install dependencies') {
             steps {
-                dir('31.homework') {
-                    sh 'pip install -r requirements.txt'
-                }
+                sh '''#!/bin/bash
+                    echo "Обновление пакетов и установка зависимостей..."
+                    apt-get update
+                    apt-get install -y python3 python3-dev python3-pip python3.11-venv
+                    rm -rf ${PROJECT_DIR}/venv
+                    echo "Создание виртуального окружения..."
+                    python3 -m venv ${PROJECT_DIR}/venv
+                '''
             }
         }
 
-        stage('Run Tests') {
+        stage('Install requirements') {
             steps {
-                dir('31.homework') {
-                    sh 'docker-compose run --rm app pytest tests/test_database.py --maxfail=5 --disable-warnings -v --junitxml=allure-results/test-results.xml'
+                sh '''#!/bin/bash
+                    if [ ! -d "${PROJECT_DIR}/venv" ]; then
+                        echo "Ошибка: виртуальное окружение не найдено!"
+                        exit 1
+                    fi
+                    echo "Активируем виртуальное окружение..."
+                    source ${PROJECT_DIR}/venv/bin/activate
+                    echo "Устанавливаем зависимости из requirements.txt..."
+                    pip install --no-cache-dir -r ${PROJECT_DIR}/requirements.txt
+                '''
+            }
+        }
+
+        stage('Docker Tests') {
+            steps {
+                dir("${env.PROJECT_DIR}") {
+                    sh '''#!/bin/bash
+                        if ! command -v docker-compose &> /dev/null; then
+                            echo "Ошибка: docker-compose не установлен или недоступен!"
+                            exit 1
+                        fi
+                        echo "Запуск контейнера с использованием docker-compose..."
+                        docker-compose up --build -d
+                        echo "Запуск тестов в контейнере..."
+                        docker-compose run --rm app pytest -v --maxfail=5 --disable-warnings --alluredir=allure-results
+                        echo "Генерация отчета Allure..."
+                        docker-compose run --rm app allure generate allure-results --output ${PROJECT_DIR}/allure-report
+                    '''
                 }
             }
+
             post {
                 always {
-                    junit '31.homework/allure-results/test-results.xml'
-                }
-            }
-        }
-
-        stage('Generate Allure Report') {
-            steps {
-                dir('31.homework') {
-                    script {
-                        allure([
-                            includeProperties: false,
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'allure-results']]
-                        ])
-                    }
+                    echo "Публикуем результаты тестов в Jenkins..."
+                    junit "${env.PROJECT_DIR}/allure-results/test-results.xml"
+                    echo "Публикуем отчет Allure..."
+                    allure([
+                        includeProperties: false,
+                        results: [[path: "${env.PROJECT_DIR}/allure-report"]]
+                    ])
                 }
             }
         }
@@ -51,27 +76,45 @@ pipeline {
 
     post {
         always {
+            script {
+                try {
+                    echo "Попытка генерации отчета Allure..."
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        results: [[path: "${env.PROJECT_DIR}/allure-report"]]
+                    ])
+                } catch (Exception e) {
+                    echo "Ошибка генерации Allure-отчета: ${e.getMessage()}"
+                }
+            }
+
+            echo "Отправка уведомления по электронной почте..."
             emailext (
-                to: "${EMAIL_RECIPIENT}",
-                subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                subject: "Статус сборки: ${currentBuild.currentResult}",
                 body: """
-                    <p>Статус: ${currentBuild.currentResult}</p>
-                    <p>Номер збірки: ${env.BUILD_NUMBER}</p>
-                    <p>URL збірки: ${env.BUILD_URL}</p>
+                    <html>
+                    <body>
+                        <h2>Статус сборки: ${currentBuild.currentResult}</h2>
+                        <p><strong>Проект:</strong> ${env.JOB_NAME}</p>
+                        <p><strong>Номер сборки:</strong> ${env.BUILD_NUMBER}</p>
+                        <p>Подробные результаты доступны: <a href=\"${env.BUILD_URL}\">${env.JOB_NAME}</a></p>
+                    </body>
+                    </html>
                 """,
-                mimeType: 'text/html',
-                attachLog: true
+                to: "InsertYour@Mail.Here",
+                mimeType: 'text/html'
             )
         }
 
         cleanup {
-            deleteDir()
-        }
-
-        failure {
-            script {
-                echo "КРИТИЧНО: Збірка не вдалася."
-            }
+            sh '''#!/bin/bash
+                echo "Удаляем виртуальное окружение..."
+                rm -rf ${PROJECT_DIR}/venv
+                echo "Остановка и удаление всех контейнеров..."
+                cd ${PROJECT_DIR}
+                docker-compose down || true
+            '''
         }
     }
 }
