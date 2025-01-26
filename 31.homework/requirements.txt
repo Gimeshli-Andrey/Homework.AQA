@@ -1,5 +1,5 @@
-werkzeug==2.3.3
 Flask==2.3.0
+werkzeug==2.3.3
 psycopg2-binary==2.9.9
 pytest==7.4.0
 python-dotenv==1.0.0
@@ -10,4 +10,4 @@ pytest-html==4.1.1
 pytest-metadata==3.1.1
 requests==2.32.3
 urllib3==2.2.3
-selenium==4.27.1
+pytz==2023.3
