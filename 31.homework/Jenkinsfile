@@ -83,9 +83,43 @@ pipeline {
             allure includeProperties: false, jdk: '', results: [[path: "${env.PROJECT_DIR}/allure-results"]]
         }
         success {
+            emailext (
+                subject: "Результаты тестирования для проекта ${env.PROJECT_DIR}",
+                body: """
+                    <html>
+                        <body>
+                            <h2>Тестирование прошло успешно для проекта ${env.PROJECT_DIR}</h2>
+                            <p>Тестирование завершилось успешно. Для получения подробных отчетов, пожалуйста, перейдите по ссылке:</p>
+                            <ul>
+                                <li><a href="file://${env.WORKSPACE}/${env.PROJECT_DIR}/allure-report/index.html">Ссылка на отчет Allure</a></li>
+                            </ul>
+                            <p>Подробности см. в отчетах.</p>
+                        </body>
+                    </html>
+                """,
+                to: 'gimeshli.a@gmail.com',
+                mimeType: 'text/html'
+            )
             echo "Пайплайн завершен успешно."
         }
         failure {
+            emailext (
+                subject: "Ошибка тестирования для проекта ${env.PROJECT_DIR}",
+                body: """
+                    <html>
+                        <body>
+                            <h2>Ошибка тестирования для проекта ${env.PROJECT_DIR}</h2>
+                            <p>Тестирование завершилось с ошибкой. Для получения подробной информации о причине ошибки, перейдите по следующей ссылке:</p>
+                            <ul>
+                                <li><a href="file://${env.WORKSPACE}/${env.PROJECT_DIR}/allure-report/index.html">Ссылка на отчет Allure</a></li>
+                            </ul>
+                            <p>См. логи для подробностей.</p>
+                        </body>
+                    </html>
+                """,
+                to: 'gimeshli.a@gmail.com',
+                mimeType: 'text/html'
+            )
             echo "Пайплайн завершен с ошибкой."
         }
     }
