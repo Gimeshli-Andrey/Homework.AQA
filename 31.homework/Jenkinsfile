@@ -36,11 +36,18 @@ pipeline {
                     fi
                     echo "Активируем виртуальное окружение..."
                     source ${PROJECT_DIR}/venv/bin/activate
+
+                    echo "Текущий Python: $(which python)"
+                    echo "Версия Python: $(python --version)"
+
                     echo "Устанавливаем зависимости из requirements.txt..."
                     pip install --no-cache-dir -r ${PROJECT_DIR}/requirements.txt
 
-                    # Устанавливаем pytest, если его нет в requirements.txt
-                    pip install pytest
+                    # Устанавливаем Faker
+                    pip install Faker
+
+                    # Устанавливаем pytz
+                    pip install pytz
                 '''
             }
         }
@@ -49,12 +56,22 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     echo "Проверка содержимого каталога tests..."
-                    ls -l ${PROJECT_DIR}/tests/ || echo "Каталог tests не найден"
+                    if [ -d "${PROJECT_DIR}/tests" ]; then
+                        ls -l ${PROJECT_DIR}/tests/
+                    else
+                        echo "Каталог tests не найден"
+                        exit 1
+                    fi
 
                     echo "Текущий каталог: $(pwd)"
+                    echo "Активируем виртуальное окружение..."
+                    source ${PROJECT_DIR}/venv/bin/activate
+
+                    echo "Текущий Python: $(which python)"
+                    echo "Версия Python: $(python --version)"
+
                     echo "Запуск тестов..."
-                    source venv/bin/activate
-                    pytest ${PROJECT_DIR}/tests/test_app.py --alluredir=${PROJECT_DIR}/allure-results || echo "Ошибка при запуске тестов"
+                    pytest ${PROJECT_DIR}/tests/test_app.py --alluredir=${PROJECT_DIR}/allure-results || exit 1
                 '''
             }
         }
