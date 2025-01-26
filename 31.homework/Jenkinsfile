@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "Клонирование кода из репозитория..."
+                echo "Клонуємо код з репозиторію..."
                 git branch: 'main', url: 'https://github.com/Gimeshli-Andrey/Homework.AQA.git'
             }
         }
@@ -17,11 +17,11 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 sh '''#!/bin/bash
-                    echo "Обновление пакетов и установка зависимостей..."
+                    echo "Оновлення пакетів і установка залежностей..."
                     apt-get update
                     apt-get install -y python3 python3-dev python3-pip python3.11-venv
                     rm -rf ${PROJECT_DIR}/venv
-                    echo "Создание виртуального окружения..."
+                    echo "Створення віртуального середовища..."
                     python3 -m venv ${PROJECT_DIR}/venv
                 '''
             }
@@ -31,22 +31,22 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     if [ ! -d "${PROJECT_DIR}/venv" ]; then
-                        echo "Ошибка: виртуальное окружение не найдено!"
+                        echo "Помилка: віртуальне середовище не знайдено!"
                         exit 1
                     fi
-                    echo "Активируем виртуальное окружение..."
+                    echo "Активуємо віртуальне середовище..."
                     source ${PROJECT_DIR}/venv/bin/activate
 
-                    echo "Текущий Python: $(which python)"
-                    echo "Версия Python: $(python --version)"
+                    echo "Поточний Python: $(which python)"
+                    echo "Версія Python: $(python --version)"
 
-                    echo "Устанавливаем зависимости из requirements.txt..."
+                    echo "Встановлюємо залежності з requirements.txt..."
                     pip install --no-cache-dir -r ${PROJECT_DIR}/requirements.txt
 
-                    # Устанавливаем Faker
+                    # Встановлюємо Faker
                     pip install Faker
 
-                    # Устанавливаем pytz
+                    # Встановлюємо pytz
                     pip install pytz
                 '''
             }
@@ -55,22 +55,22 @@ pipeline {
         stage('Run tests') {
             steps {
                 sh '''#!/bin/bash
-                    echo "Проверка содержимого каталога tests..."
+                    echo "Перевірка вмісту каталогу tests..."
                     if [ -d "${PROJECT_DIR}/tests" ]; then
                         ls -l ${PROJECT_DIR}/tests/
                     else
-                        echo "Каталог tests не найден"
+                        echo "Каталог tests не знайдений"
                         exit 1
                     fi
 
-                    echo "Текущий каталог: $(pwd)"
-                    echo "Активируем виртуальное окружение..."
+                    echo "Поточний каталог: $(pwd)"
+                    echo "Активуємо віртуальне середовище..."
                     source ${PROJECT_DIR}/venv/bin/activate
 
-                    echo "Текущий Python: $(which python)"
-                    echo "Версия Python: $(python --version)"
+                    echo "Поточний Python: $(which python)"
+                    echo "Версія Python: $(python --version)"
 
-                    echo "Запуск тестов..."
+                    echo "Запуск тестів..."
                     pytest ${PROJECT_DIR}/tests/test_app.py --alluredir=${PROJECT_DIR}/allure-results || exit 1
                 '''
             }
@@ -79,14 +79,50 @@ pipeline {
 
     post {
         always {
-            echo "Публикуем результаты тестов и отчет Allure..."
+            echo "Публікуємо результати тестів та звіт Allure..."
             allure includeProperties: false, jdk: '', results: [[path: "${env.PROJECT_DIR}/allure-results"]]
         }
         success {
-            echo "Пайплайн завершен успешно."
+            emailext (
+                subject: "Результати тестування для проєкту ${env.PROJECT_DIR}",
+                body: """
+                    <html>
+                        <body>
+                            <h2>Тестування пройшло успішно для проєкту ${env.PROJECT_DIR}</h2>
+                            <p>Тестування завершилося успішно. Для отримання докладних звітів, будь ласка, перейдіть за посиланням:</p>
+                            <ul>
+                                <li><a href="${BUILD_URL}artifact/allure-report/index.html">Посилання на звіт Allure</a></li>
+                            </ul>
+                            <p>Докладності дивіться у звітах.</p>
+                        </body>
+                    </html>
+                """,
+                to: 'gimeshli.a@gmail.com',
+                from: 'Manage Jenkins <jenkins@yourdomain.com>',
+                mimeType: 'text/html'
+            )
+            echo "Пайплайн завершений успішно."
         }
         failure {
-            echo "Пайплайн завершен с ошибкой."
+            emailext (
+                subject: "Помилка тестування для проєкту ${env.PROJECT_DIR}",
+                body: """
+                    <html>
+                        <body>
+                            <h2>Помилка тестування для проєкту ${env.PROJECT_DIR}</h2>
+                            <p>Тестування завершилося з помилкою. Для отримання докладної інформації про причину помилки, перейдіть за наступним посиланням:</p>
+                            <ul>
+                                <li><a href="${BUILD_URL}artifact/allure-report/index.html">Посилання на звіт Allure</a></li>
+                            </ul>
+                            <p>См. логи для докладностей.</p>
+                        </body>
+                    </html>
+                """,
+                to: 'gimeshli.a@gmail.com',
+                from: 'Manage Jenkins <jenkins@yourdomain.com>',
+                mimeType: 'text/html'
+            )
+            echo "Пайплайн завершений з помилкою."
         }
     }
 }
